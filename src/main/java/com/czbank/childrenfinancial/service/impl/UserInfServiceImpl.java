@@ -46,14 +46,12 @@ public class UserInfServiceImpl implements UserInfService {
     public Map selectByAccountPw(UserInf userInf) {
         UserInf uf = userInfoMapper.selectByAccountPw(userInf);
         Map<Object, Object> reMap = new HashMap<>();
-
         if(uf != null) {
-            
             reMap.put("user", uf);
-            reMap.put("status", "1");
-
+            reMap.put("status", "0");
+        } else {
+            reMap.put("status","1");
         }
-        else reMap.put("status","0");
         return reMap;
     }
 }
