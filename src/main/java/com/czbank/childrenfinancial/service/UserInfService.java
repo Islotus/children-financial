@@ -4,6 +4,7 @@ import com.czbank.childrenfinancial.po.UserInf;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserInfService {
     //0insert
@@ -17,7 +18,7 @@ public interface UserInfService {
     //4selectAll
     public List<UserInf> userInfoSelectAll(int np, int size);
     //登录，根据账户密码查询，返回user_inf的信息
-    public UserInf selectByAccountPw(UserInf userInf);
+    public Map selectByAccountPw(UserInf userInf);
 
 
 }

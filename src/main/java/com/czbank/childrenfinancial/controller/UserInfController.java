@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class UserInfController {
@@ -107,8 +110,7 @@ public class UserInfController {
         return JSON.toJSONString(userInfoService.userInfoSelectAll(Integer.parseInt(np),Integer.parseInt(size)));
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Object selectByAccountPw(@RequestBody LoginIn login){
-        //接受
+    public Object selectByAccountPw(@RequestBody LoginIn login,HttpServletRequest request) {
         String account = login.getAccount();
         String loginPw = login.getLoginPw();
         //封装
@@ -116,6 +118,21 @@ public class UserInfController {
         userInf.setAccount(account);
         userInf.setLoginPw(loginPw);
         //处理
-        return JSON.toJSONString(userInfoService.selectByAccountPw(userInf));
+//        return JSON.toJSONString(userInfoService.selectByAccountPw(userInf));
+
+
+        HttpSession session = request.getSession();
+        session.setAttribute("account",null);
+
+        Map<Object,Object> reMap = userInfoService.selectByAccountPw((userInf));
+
+        boolean flag = ((String)(reMap.get("status"))).equals("1");
+        if(flag){
+            session.setAttribute("account",account);
+        }
+
+        System.out.println(session.getAttribute("account"));
+        return reMap;
+
     }
 }

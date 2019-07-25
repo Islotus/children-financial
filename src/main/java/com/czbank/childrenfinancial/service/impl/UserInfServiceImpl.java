@@ -1,12 +1,15 @@
 package com.czbank.childrenfinancial.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.czbank.childrenfinancial.mapper.UserInfMapper;
 import com.czbank.childrenfinancial.po.UserInf;
 import com.czbank.childrenfinancial.service.UserInfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserInfServiceImpl implements UserInfService {
@@ -40,8 +43,16 @@ public class UserInfServiceImpl implements UserInfService {
         return userInfoMapper.userInfoSelectAll((np-1)*size,size);
     }
     @Override
-    public UserInf selectByAccountPw(UserInf userInf) {
-        System.out.println(userInfoMapper.selectByAccountPw(userInf));
-        return userInfoMapper.selectByAccountPw(userInf);
+    public Map selectByAccountPw(UserInf userInf) {
+        UserInf uf = userInfoMapper.selectByAccountPw(userInf);
+        Map<Object, Object> reMap = new HashMap<>();
+        if(uf != null) {
+            String reString = JSON.toJSONString(uf);
+            reMap = (Map) JSON.parse(reString);
+            reMap.put("status", "1");
+
+        }
+        else reMap.put("status","0");
+        return reMap;
     }
 }
