@@ -62,6 +62,19 @@ public class FinProductInf {
     private String riskLevel;
 
     /**
+     * 公司
+     */
+    @Column(name = "company")
+    private String company;
+
+
+    /**
+     * 产品描述
+     */
+    @Column(name = "prod_description")
+    private String prodDescription;
+
+    /**
      * 获取产品编号
      *
      * @return PRODUCT_ID - 产品编号
@@ -222,4 +235,21 @@ public class FinProductInf {
     public void setRiskLevel(String riskLevel) {
         this.riskLevel = riskLevel;
     }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getProdDescription() {
+        return prodDescription;
+    }
+
+    public void setProdDescription(String prodDescription) {
+        this.prodDescription = prodDescription;
+    }
+
 }
