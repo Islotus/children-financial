@@ -116,18 +116,13 @@ public class UserInfController {
         userInf.setLoginPw(loginPw);
         //处理
 //        return JSON.toJSONString(userInfoService.selectByAccountPw(userInf));
-
-
         HttpSession session = request.getSession();
         session.setAttribute("account",null);
-
         Map<Object,Object> reMap = userInfoService.selectByAccountPw((userInf));
-
-        boolean flag = ((String)(reMap.get("status"))).equals("1");
+        boolean flag = ((String)(reMap.get("status"))).equals("0");
         if(flag){
             session.setAttribute("account",account);
         }
-
         System.out.println(session.getAttribute("account"));
         return reMap;
 
