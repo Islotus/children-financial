@@ -17,19 +17,15 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     public Map getProductInfo(String account){
-
         String riskLevel = productMapper.getIsParent(account);
-
         List<FinProductInf> fpiList = productMapper.getProductInf(riskLevel);
         Map<Object, Object> reMap = new HashMap<>();
-
         if(!fpiList.isEmpty()){
             reMap.put("product",fpiList);
-            reMap.put("status","1");
+            reMap.put("status","0");
         }
-        else reMap.put("status","0");
+        else reMap.put("status","1");
         return reMap;
-
     }
 
 }
