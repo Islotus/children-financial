@@ -4,6 +4,15 @@ public class LoginIn {
     String userId;
     String account;
     String loginPw;
+    String isParent;
+
+    public String getIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(String isParent) {
+        this.isParent = isParent;
+    }
 
     public String getLoginPw() {
         System.out.println("loginPw: " + loginPw);
