@@ -38,6 +38,24 @@ public class BusiInf {
     private Date updTime;
 
     /**
+     * 产品类型product_type string
+     */
+    @Column(name = "product_type")
+    private String productType;
+
+    /**
+     * 定时起始时间start_time datetime
+     */
+    @Column(name = "start_time")
+    private Date startTime;
+
+    /**
+     * 定时周期time_period int
+     */
+    @Column(name = "time_period")
+    private int timePeriod;
+
+    /**
      * 获取业务编号
      *
      * @return BUSI_ID - 业务编号
