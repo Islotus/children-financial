@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czbank.children_financial_v100.mapper.LsInfMapper">
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.LsInf">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="BUSI_ACCEPT_ID" jdbcType="VARCHAR" property="busiAcceptId" />
+    <result column="OWN_ACCT" jdbcType="VARCHAR" property="ownAcct" />
+    <result column="YOUR_ACCT" jdbcType="VARCHAR" property="yourAcct" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="REMAIN_AMT" jdbcType="DECIMAL" property="remainAmt" />
+    <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, STATUS, AMT, REMAIN_AMT, ADD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update ls_inf
+    <set>
+      <if test="record.busiAcceptId != null">
+        BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownAcct != null">
+        OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yourAcct != null">
+        YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainAmt != null">
+        REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addTime != null">
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update ls_inf
+    set BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.LsInf">
+    <result column="BUSI_ACCEPT_ID" jdbcType="VARCHAR" property="busiAcceptId" />
+    <result column="OWN_ACCT" jdbcType="VARCHAR" property="ownAcct" />
+    <result column="YOUR_ACCT" jdbcType="VARCHAR" property="yourAcct" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="REMAIN_AMT" jdbcType="DECIMAL" property="remainAmt" />
+    <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, STATUS, AMT, REMAIN_AMT, ADD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample">
+    delete from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf (BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, 
+      STATUS, AMT, REMAIN_AMT, 
+      ADD_TIME)
+    values (#{busiAcceptId,jdbcType=VARCHAR}, #{ownAcct,jdbcType=VARCHAR}, #{yourAcct,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{remainAmt,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        BUSI_ACCEPT_ID,
+      </if>
+      <if test="ownAcct != null">
+        OWN_ACCT,
+      </if>
+      <if test="yourAcct != null">
+        YOUR_ACCT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="remainAmt != null">
+        REMAIN_AMT,
+      </if>
+      <if test="addTime != null">
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        #{busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownAcct != null">
+        #{ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="yourAcct != null">
+        #{yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainAmt != null">
+        #{remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultType="java.lang.Integer">
+    select count(*) from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ls_inf
+    <set>
+      <if test="record.busiAcceptId != null">
+        BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownAcct != null">
+        OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yourAcct != null">
+        YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainAmt != null">
+        REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addTime != null">
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ls_inf
+    set BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.LsInf">
+    <result column="BUSI_ACCEPT_ID" jdbcType="VARCHAR" property="busiAcceptId" />
+    <result column="OWN_ACCT" jdbcType="VARCHAR" property="ownAcct" />
+    <result column="YOUR_ACCT" jdbcType="VARCHAR" property="yourAcct" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="REMAIN_AMT" jdbcType="DECIMAL" property="remainAmt" />
+    <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, STATUS, AMT, REMAIN_AMT, ADD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample">
+    delete from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf (BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, 
+      STATUS, AMT, REMAIN_AMT, 
+      ADD_TIME)
+    values (#{busiAcceptId,jdbcType=VARCHAR}, #{ownAcct,jdbcType=VARCHAR}, #{yourAcct,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{remainAmt,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        BUSI_ACCEPT_ID,
+      </if>
+      <if test="ownAcct != null">
+        OWN_ACCT,
+      </if>
+      <if test="yourAcct != null">
+        YOUR_ACCT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="remainAmt != null">
+        REMAIN_AMT,
+      </if>
+      <if test="addTime != null">
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        #{busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownAcct != null">
+        #{ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="yourAcct != null">
+        #{yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainAmt != null">
+        #{remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultType="java.lang.Integer">
+    select count(*) from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ls_inf
+    <set>
+      <if test="record.busiAcceptId != null">
+        BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownAcct != null">
+        OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yourAcct != null">
+        YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainAmt != null">
+        REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addTime != null">
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ls_inf
+    set BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.LsInf">
+    <result column="BUSI_ACCEPT_ID" jdbcType="VARCHAR" property="busiAcceptId" />
+    <result column="OWN_ACCT" jdbcType="VARCHAR" property="ownAcct" />
+    <result column="YOUR_ACCT" jdbcType="VARCHAR" property="yourAcct" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="REMAIN_AMT" jdbcType="DECIMAL" property="remainAmt" />
+    <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, STATUS, AMT, REMAIN_AMT, ADD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample">
+    delete from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf (BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, 
+      STATUS, AMT, REMAIN_AMT, 
+      ADD_TIME)
+    values (#{busiAcceptId,jdbcType=VARCHAR}, #{ownAcct,jdbcType=VARCHAR}, #{yourAcct,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{remainAmt,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        BUSI_ACCEPT_ID,
+      </if>
+      <if test="ownAcct != null">
+        OWN_ACCT,
+      </if>
+      <if test="yourAcct != null">
+        YOUR_ACCT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="remainAmt != null">
+        REMAIN_AMT,
+      </if>
+      <if test="addTime != null">
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        #{busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownAcct != null">
+        #{ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="yourAcct != null">
+        #{yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainAmt != null">
+        #{remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultType="java.lang.Integer">
+    select count(*) from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ls_inf
+    <set>
+      <if test="record.busiAcceptId != null">
+        BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownAcct != null">
+        OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yourAcct != null">
+        YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainAmt != null">
+        REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addTime != null">
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ls_inf
+    set BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.LsInf">
+    <result column="BUSI_ACCEPT_ID" jdbcType="VARCHAR" property="busiAcceptId" />
+    <result column="OWN_ACCT" jdbcType="VARCHAR" property="ownAcct" />
+    <result column="YOUR_ACCT" jdbcType="VARCHAR" property="yourAcct" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="REMAIN_AMT" jdbcType="DECIMAL" property="remainAmt" />
+    <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, STATUS, AMT, REMAIN_AMT, ADD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample">
+    delete from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf (BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, 
+      STATUS, AMT, REMAIN_AMT, 
+      ADD_TIME)
+    values (#{busiAcceptId,jdbcType=VARCHAR}, #{ownAcct,jdbcType=VARCHAR}, #{yourAcct,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{remainAmt,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        BUSI_ACCEPT_ID,
+      </if>
+      <if test="ownAcct != null">
+        OWN_ACCT,
+      </if>
+      <if test="yourAcct != null">
+        YOUR_ACCT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="remainAmt != null">
+        REMAIN_AMT,
+      </if>
+      <if test="addTime != null">
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        #{busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownAcct != null">
+        #{ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="yourAcct != null">
+        #{yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainAmt != null">
+        #{remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultType="java.lang.Integer">
+    select count(*) from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ls_inf
+    <set>
+      <if test="record.busiAcceptId != null">
+        BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownAcct != null">
+        OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yourAcct != null">
+        YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainAmt != null">
+        REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addTime != null">
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ls_inf
+    set BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.LsInf">
+    <result column="BUSI_ACCEPT_ID" jdbcType="VARCHAR" property="busiAcceptId" />
+    <result column="OWN_ACCT" jdbcType="VARCHAR" property="ownAcct" />
+    <result column="YOUR_ACCT" jdbcType="VARCHAR" property="yourAcct" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="REMAIN_AMT" jdbcType="DECIMAL" property="remainAmt" />
+    <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, STATUS, AMT, REMAIN_AMT, ADD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample">
+    delete from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf (BUSI_ACCEPT_ID, OWN_ACCT, YOUR_ACCT, 
+      STATUS, AMT, REMAIN_AMT, 
+      ADD_TIME)
+    values (#{busiAcceptId,jdbcType=VARCHAR}, #{ownAcct,jdbcType=VARCHAR}, #{yourAcct,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{remainAmt,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.LsInf">
+    insert into ls_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        BUSI_ACCEPT_ID,
+      </if>
+      <if test="ownAcct != null">
+        OWN_ACCT,
+      </if>
+      <if test="yourAcct != null">
+        YOUR_ACCT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="remainAmt != null">
+        REMAIN_AMT,
+      </if>
+      <if test="addTime != null">
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="busiAcceptId != null">
+        #{busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownAcct != null">
+        #{ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="yourAcct != null">
+        #{yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainAmt != null">
+        #{remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.LsInfExample" resultType="java.lang.Integer">
+    select count(*) from ls_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ls_inf
+    <set>
+      <if test="record.busiAcceptId != null">
+        BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownAcct != null">
+        OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yourAcct != null">
+        YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainAmt != null">
+        REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addTime != null">
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ls_inf
+    set BUSI_ACCEPT_ID = #{record.busiAcceptId,jdbcType=VARCHAR},
+      OWN_ACCT = #{record.ownAcct,jdbcType=VARCHAR},
+      YOUR_ACCT = #{record.yourAcct,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      REMAIN_AMT = #{record.remainAmt,jdbcType=DECIMAL},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
