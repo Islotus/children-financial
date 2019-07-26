@@ -91,9 +91,14 @@ public class UserMngController {
     @RequestMapping("/queryRemainAmt")
     public Object queryRemainAmt(HttpServletRequest req, HttpServletResponse resp) {
         String account = req.getParameter("account");
-        String pn = req.getParameter("pn");
-        String ps = req.getParameter("ps");
 
         return JSON.toJSONString(userManagementService.getRemainAmt(account));
     }
+
+    @RequestMapping("/querySonAcct")
+    public Object querySonAcct(HttpServletRequest req, HttpServletResponse resp) {
+        String pAcct = req.getParameter("account");
+        return JSON.toJSONString(userManagementService.querySonAcctByParentAcct(pAcct));
+    }
+
 }

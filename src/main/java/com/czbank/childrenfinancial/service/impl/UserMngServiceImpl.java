@@ -10,6 +10,7 @@ import com.czbank.childrenfinancial.service.UserManagementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -17,6 +18,7 @@ import java.util.*;
 @Slf4j
 @Service
 public class UserMngServiceImpl implements UserManagementService {
+    private static final String PARENT = "1";
 
     @Autowired
     UserMngDao userMngDao;
@@ -168,5 +170,29 @@ public class UserMngServiceImpl implements UserManagementService {
         log.info("信息维护成功！" + newPw);
 
         return msg;
+    }
+
+    @Override
+    public Map<String, Object> querySonAcctByParentAcct(String pAcct) {
+        UserInf parent = queryUserInf(pAcct);
+        String sonAcct = "";
+        if (PARENT.equals(parent.getIsParent())) {
+            //父母身份
+            sonAcct = parent.getRelatedAccount();
+            if (StringUtils.isEmpty(sonAcct)) {
+                throw new RuntimeException("子账户为空，未绑定子账户");
+            }
+        } else {
+            throw new RuntimeException("该账号为子账号，无孙子账号存在");
+        }
+
+        Map<String, String> amt = getRemainAmt(sonAcct);
+        Map<String, Object> sonInf = new HashMap<>();
+        sonInf.putAll(amt);
+        UserInf sonUserInf = queryUserInf(sonAcct);
+        sonInf.put("sonUserInf", sonUserInf);
+        log.info(sonInf.toString());
+
+        return sonInf;
     }
 }
