@@ -101,7 +101,7 @@ public class UserMngDao {
             log.info("查询账户是否存在错误");
         }
         if(num != 0){
-            ret = -1;
+            ret = 2;
         }else{
             //生成user_id
             String idStr = String.valueOf(SnowFlake.nextId());
