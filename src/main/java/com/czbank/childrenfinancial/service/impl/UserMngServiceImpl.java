@@ -2,6 +2,7 @@ package com.czbank.childrenfinancial.service.impl;
 
 import com.czbank.childrenfinancial.Utils.SnowFlake;
 import com.czbank.childrenfinancial.dao.UserMngDao;
+import com.czbank.childrenfinancial.po.BusiInf;
 import com.czbank.childrenfinancial.po.CardInf;
 import com.czbank.childrenfinancial.po.LsInf;
 import com.czbank.childrenfinancial.po.UserInf;
@@ -9,15 +10,15 @@ import com.czbank.childrenfinancial.service.UserManagementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 @Service
 public class UserMngServiceImpl implements UserManagementService {
+    private static final String PARENT = "1";
 
     @Autowired
     UserMngDao userMngDao;
@@ -76,8 +77,33 @@ public class UserMngServiceImpl implements UserManagementService {
     }
 
     @Override
-    public String getRemainAmt(String account) {
-        return null;
+    public Map<String, String> getRemainAmt(String account) {
+        UserInf userInf = userMngDao.getUserInfByAccount(account);
+        if (userInf == null) {
+            throw new RuntimeException("账号查询不存在");
+        }
+
+        CardInf cardInf = userMngDao.getCardInfByUserId(userInf.getUserId());
+        if (cardInf != null) {
+            log.info("卡信息：" + cardInf.toString());
+            log.info("卡余额：" + cardInf.getAmt());
+        } else {
+            throw new RuntimeException("查询卡信息为空");
+        }
+
+        BusiInf busiInf = userMngDao.getBusiInfByUserId(userInf.getUserId());
+        if (busiInf != null) {
+            log.info("用户办理的理财产品信息：" + busiInf.toString());
+            log.info("理财产品余额：" + busiInf.getAmt());
+        } else {
+            throw new RuntimeException("查询理财信息为空");
+        }
+
+        Map<String, String> amtMap = new HashMap<>();
+        amtMap.put("cardAmt", cardInf.getAmt().toPlainString());
+        amtMap.put("finAmt", busiInf.getAmt().toPlainString());
+
+        return amtMap;
     }
 
     @Override
@@ -144,5 +170,29 @@ public class UserMngServiceImpl implements UserManagementService {
         log.info("信息维护成功！" + newPw);
 
         return msg;
+    }
+
+    @Override
+    public Map<String, Object> querySonAcctByParentAcct(String pAcct) {
+        UserInf parent = queryUserInf(pAcct);
+        String sonAcct = "";
+        if (PARENT.equals(parent.getIsParent())) {
+            //父母身份
+            sonAcct = parent.getRelatedAccount();
+            if (StringUtils.isEmpty(sonAcct)) {
+                throw new RuntimeException("子账户为空，未绑定子账户");
+            }
+        } else {
+            throw new RuntimeException("该账号为子账号，无孙子账号存在");
+        }
+
+        Map<String, String> amt = getRemainAmt(sonAcct);
+        Map<String, Object> sonInf = new HashMap<>();
+        sonInf.putAll(amt);
+        UserInf sonUserInf = queryUserInf(sonAcct);
+        sonInf.put("sonUserInf", sonUserInf);
+        log.info(sonInf.toString());
+
+        return sonInf;
     }
 }

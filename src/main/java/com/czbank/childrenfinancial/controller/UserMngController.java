@@ -19,7 +19,7 @@ public class UserMngController {
      * In：account
      * Out：UserInf
      */
-    @RequestMapping("/QueryUserInf")
+    @RequestMapping("/queryUserInf")
     public Object queryUserInf(HttpServletRequest req, HttpServletResponse resp) {
         //接受
         String account = req.getParameter("account");
@@ -28,7 +28,7 @@ public class UserMngController {
     }
 
     /**
-     * 用户手机号维护
+     * 用户手机号维护-用户表
      * @param req
      * @return 000000表示更新成功
      */
@@ -81,4 +81,24 @@ public class UserMngController {
 
         return JSON.toJSONString(userManagementService.settleBankCard(account, cardNbr, payPw));
     }
+
+    /**
+     * 余额查询-卡表和理财表
+     * @param req
+     * @param resp
+     * @return
+     */
+    @RequestMapping("/queryRemainAmt")
+    public Object queryRemainAmt(HttpServletRequest req, HttpServletResponse resp) {
+        String account = req.getParameter("account");
+
+        return JSON.toJSONString(userManagementService.getRemainAmt(account));
+    }
+
+    @RequestMapping("/querySonAcct")
+    public Object querySonAcct(HttpServletRequest req, HttpServletResponse resp) {
+        String pAcct = req.getParameter("account");
+        return JSON.toJSONString(userManagementService.querySonAcctByParentAcct(pAcct));
+    }
+
 }

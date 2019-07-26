@@ -1,10 +1,13 @@
 package com.czbank.childrenfinancial.po;
 
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@ToString
 @Table(name = "busi_inf")
 public class BusiInf {
     /**

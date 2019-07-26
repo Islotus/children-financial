@@ -1,9 +1,12 @@
 package com.czbank.childrenfinancial.po;
 
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
+@ToString
 @Table(name = "card_inf")
 public class CardInf {
     /**
