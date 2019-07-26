@@ -1,0 +1,1430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czbank.children_financial_v100.mapper.FinProductInfMapper">
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.FinProductInf">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="SETTLE_CARDNBR" jdbcType="VARCHAR" property="settleCardnbr" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="START_AMT" jdbcType="DECIMAL" property="startAmt" />
+    <result column="END_AMT" jdbcType="DECIMAL" property="endAmt" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="RATE" jdbcType="DECIMAL" property="rate" />
+    <result column="SHORTEST_PERIOD" jdbcType="INTEGER" property="shortestPeriod" />
+    <result column="RISK_LEVEL" jdbcType="VARCHAR" property="riskLevel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, START_AMT, END_AMT, END_DATE, RATE, SHORTEST_PERIOD, 
+    RISK_LEVEL
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update fin_product_inf
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleCardnbr != null">
+        SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startAmt != null">
+        START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endAmt != null">
+        END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        RATE = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shortestPeriod != null">
+        SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.riskLevel != null">
+        RISK_LEVEL = #{record.riskLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update fin_product_inf
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      RATE = #{record.rate,jdbcType=DECIMAL},
+      SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      RISK_LEVEL = #{record.riskLevel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.FinProductInf">
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="SETTLE_CARDNBR" jdbcType="VARCHAR" property="settleCardnbr" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="START_AMT" jdbcType="DECIMAL" property="startAmt" />
+    <result column="END_AMT" jdbcType="DECIMAL" property="endAmt" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="RATE" jdbcType="DECIMAL" property="rate" />
+    <result column="SHORTEST_PERIOD" jdbcType="INTEGER" property="shortestPeriod" />
+    <result column="RISK_LEVEL" jdbcType="VARCHAR" property="riskLevel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, START_AMT, END_AMT, END_DATE, RATE, SHORTEST_PERIOD, 
+    RISK_LEVEL
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample">
+    delete from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf (PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, 
+      START_AMT, END_AMT, END_DATE, 
+      RATE, SHORTEST_PERIOD, RISK_LEVEL
+      )
+    values (#{productId,jdbcType=VARCHAR}, #{settleCardnbr,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{startAmt,jdbcType=DECIMAL}, #{endAmt,jdbcType=DECIMAL}, #{endDate,jdbcType=DATE}, 
+      #{rate,jdbcType=DECIMAL}, #{shortestPeriod,jdbcType=INTEGER}, #{riskLevel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="settleCardnbr != null">
+        SETTLE_CARDNBR,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="startAmt != null">
+        START_AMT,
+      </if>
+      <if test="endAmt != null">
+        END_AMT,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="rate != null">
+        RATE,
+      </if>
+      <if test="shortestPeriod != null">
+        SHORTEST_PERIOD,
+      </if>
+      <if test="riskLevel != null">
+        RISK_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleCardnbr != null">
+        #{settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="startAmt != null">
+        #{startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endAmt != null">
+        #{endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="shortestPeriod != null">
+        #{shortestPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="riskLevel != null">
+        #{riskLevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultType="java.lang.Integer">
+    select count(*) from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fin_product_inf
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleCardnbr != null">
+        SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startAmt != null">
+        START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endAmt != null">
+        END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        RATE = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shortestPeriod != null">
+        SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.riskLevel != null">
+        RISK_LEVEL = #{record.riskLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fin_product_inf
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      RATE = #{record.rate,jdbcType=DECIMAL},
+      SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      RISK_LEVEL = #{record.riskLevel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.FinProductInf">
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="SETTLE_CARDNBR" jdbcType="VARCHAR" property="settleCardnbr" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="START_AMT" jdbcType="DECIMAL" property="startAmt" />
+    <result column="END_AMT" jdbcType="DECIMAL" property="endAmt" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="RATE" jdbcType="DECIMAL" property="rate" />
+    <result column="SHORTEST_PERIOD" jdbcType="INTEGER" property="shortestPeriod" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, START_AMT, END_AMT, END_DATE, RATE, SHORTEST_PERIOD
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample">
+    delete from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf (PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, 
+      START_AMT, END_AMT, END_DATE, 
+      RATE, SHORTEST_PERIOD)
+    values (#{productId,jdbcType=VARCHAR}, #{settleCardnbr,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{startAmt,jdbcType=DECIMAL}, #{endAmt,jdbcType=DECIMAL}, #{endDate,jdbcType=DATE}, 
+      #{rate,jdbcType=DECIMAL}, #{shortestPeriod,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="settleCardnbr != null">
+        SETTLE_CARDNBR,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="startAmt != null">
+        START_AMT,
+      </if>
+      <if test="endAmt != null">
+        END_AMT,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="rate != null">
+        RATE,
+      </if>
+      <if test="shortestPeriod != null">
+        SHORTEST_PERIOD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleCardnbr != null">
+        #{settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="startAmt != null">
+        #{startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endAmt != null">
+        #{endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="shortestPeriod != null">
+        #{shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultType="java.lang.Integer">
+    select count(*) from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fin_product_inf
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleCardnbr != null">
+        SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startAmt != null">
+        START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endAmt != null">
+        END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        RATE = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shortestPeriod != null">
+        SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fin_product_inf
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      RATE = #{record.rate,jdbcType=DECIMAL},
+      SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.FinProductInf">
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="SETTLE_CARDNBR" jdbcType="VARCHAR" property="settleCardnbr" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="START_AMT" jdbcType="DECIMAL" property="startAmt" />
+    <result column="END_AMT" jdbcType="DECIMAL" property="endAmt" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="RATE" jdbcType="DECIMAL" property="rate" />
+    <result column="SHORTEST_PERIOD" jdbcType="INTEGER" property="shortestPeriod" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, START_AMT, END_AMT, END_DATE, RATE, SHORTEST_PERIOD
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample">
+    delete from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf (PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, 
+      START_AMT, END_AMT, END_DATE, 
+      RATE, SHORTEST_PERIOD)
+    values (#{productId,jdbcType=VARCHAR}, #{settleCardnbr,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{startAmt,jdbcType=DECIMAL}, #{endAmt,jdbcType=DECIMAL}, #{endDate,jdbcType=DATE}, 
+      #{rate,jdbcType=DECIMAL}, #{shortestPeriod,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="settleCardnbr != null">
+        SETTLE_CARDNBR,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="startAmt != null">
+        START_AMT,
+      </if>
+      <if test="endAmt != null">
+        END_AMT,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="rate != null">
+        RATE,
+      </if>
+      <if test="shortestPeriod != null">
+        SHORTEST_PERIOD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleCardnbr != null">
+        #{settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="startAmt != null">
+        #{startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endAmt != null">
+        #{endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="shortestPeriod != null">
+        #{shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultType="java.lang.Integer">
+    select count(*) from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fin_product_inf
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleCardnbr != null">
+        SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startAmt != null">
+        START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endAmt != null">
+        END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        RATE = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shortestPeriod != null">
+        SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fin_product_inf
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      RATE = #{record.rate,jdbcType=DECIMAL},
+      SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.FinProductInf">
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="SETTLE_CARDNBR" jdbcType="VARCHAR" property="settleCardnbr" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="START_AMT" jdbcType="DECIMAL" property="startAmt" />
+    <result column="END_AMT" jdbcType="DECIMAL" property="endAmt" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="RATE" jdbcType="DECIMAL" property="rate" />
+    <result column="SHORTEST_PERIOD" jdbcType="INTEGER" property="shortestPeriod" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, START_AMT, END_AMT, END_DATE, RATE, SHORTEST_PERIOD
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample">
+    delete from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf (PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, 
+      START_AMT, END_AMT, END_DATE, 
+      RATE, SHORTEST_PERIOD)
+    values (#{productId,jdbcType=VARCHAR}, #{settleCardnbr,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{startAmt,jdbcType=DECIMAL}, #{endAmt,jdbcType=DECIMAL}, #{endDate,jdbcType=DATE}, 
+      #{rate,jdbcType=DECIMAL}, #{shortestPeriod,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="settleCardnbr != null">
+        SETTLE_CARDNBR,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="startAmt != null">
+        START_AMT,
+      </if>
+      <if test="endAmt != null">
+        END_AMT,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="rate != null">
+        RATE,
+      </if>
+      <if test="shortestPeriod != null">
+        SHORTEST_PERIOD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleCardnbr != null">
+        #{settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="startAmt != null">
+        #{startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endAmt != null">
+        #{endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="shortestPeriod != null">
+        #{shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultType="java.lang.Integer">
+    select count(*) from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fin_product_inf
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleCardnbr != null">
+        SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startAmt != null">
+        START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endAmt != null">
+        END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        RATE = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shortestPeriod != null">
+        SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fin_product_inf
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      RATE = #{record.rate,jdbcType=DECIMAL},
+      SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.FinProductInf">
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="SETTLE_CARDNBR" jdbcType="VARCHAR" property="settleCardnbr" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="START_AMT" jdbcType="DECIMAL" property="startAmt" />
+    <result column="END_AMT" jdbcType="DECIMAL" property="endAmt" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="RATE" jdbcType="DECIMAL" property="rate" />
+    <result column="SHORTEST_PERIOD" jdbcType="INTEGER" property="shortestPeriod" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, START_AMT, END_AMT, END_DATE, RATE, SHORTEST_PERIOD
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample">
+    delete from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf (PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, 
+      START_AMT, END_AMT, END_DATE, 
+      RATE, SHORTEST_PERIOD)
+    values (#{productId,jdbcType=VARCHAR}, #{settleCardnbr,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{startAmt,jdbcType=DECIMAL}, #{endAmt,jdbcType=DECIMAL}, #{endDate,jdbcType=DATE}, 
+      #{rate,jdbcType=DECIMAL}, #{shortestPeriod,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="settleCardnbr != null">
+        SETTLE_CARDNBR,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="startAmt != null">
+        START_AMT,
+      </if>
+      <if test="endAmt != null">
+        END_AMT,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="rate != null">
+        RATE,
+      </if>
+      <if test="shortestPeriod != null">
+        SHORTEST_PERIOD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleCardnbr != null">
+        #{settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="startAmt != null">
+        #{startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endAmt != null">
+        #{endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="shortestPeriod != null">
+        #{shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultType="java.lang.Integer">
+    select count(*) from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fin_product_inf
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleCardnbr != null">
+        SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startAmt != null">
+        START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endAmt != null">
+        END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        RATE = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shortestPeriod != null">
+        SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fin_product_inf
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      RATE = #{record.rate,jdbcType=DECIMAL},
+      SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.FinProductInf">
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="SETTLE_CARDNBR" jdbcType="VARCHAR" property="settleCardnbr" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="START_AMT" jdbcType="DECIMAL" property="startAmt" />
+    <result column="END_AMT" jdbcType="DECIMAL" property="endAmt" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="RATE" jdbcType="DECIMAL" property="rate" />
+    <result column="SHORTEST_PERIOD" jdbcType="INTEGER" property="shortestPeriod" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, START_AMT, END_AMT, END_DATE, RATE, SHORTEST_PERIOD
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample">
+    delete from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf (PRODUCT_ID, SETTLE_CARDNBR, PRODUCT_NAME, 
+      START_AMT, END_AMT, END_DATE, 
+      RATE, SHORTEST_PERIOD)
+    values (#{productId,jdbcType=VARCHAR}, #{settleCardnbr,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{startAmt,jdbcType=DECIMAL}, #{endAmt,jdbcType=DECIMAL}, #{endDate,jdbcType=DATE}, 
+      #{rate,jdbcType=DECIMAL}, #{shortestPeriod,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.FinProductInf">
+    insert into fin_product_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="settleCardnbr != null">
+        SETTLE_CARDNBR,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="startAmt != null">
+        START_AMT,
+      </if>
+      <if test="endAmt != null">
+        END_AMT,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="rate != null">
+        RATE,
+      </if>
+      <if test="shortestPeriod != null">
+        SHORTEST_PERIOD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleCardnbr != null">
+        #{settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="startAmt != null">
+        #{startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endAmt != null">
+        #{endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="shortestPeriod != null">
+        #{shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.FinProductInfExample" resultType="java.lang.Integer">
+    select count(*) from fin_product_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fin_product_inf
+    <set>
+      <if test="record.productId != null">
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleCardnbr != null">
+        SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startAmt != null">
+        START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endAmt != null">
+        END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        RATE = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shortestPeriod != null">
+        SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fin_product_inf
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      SETTLE_CARDNBR = #{record.settleCardnbr,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      START_AMT = #{record.startAmt,jdbcType=DECIMAL},
+      END_AMT = #{record.endAmt,jdbcType=DECIMAL},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      RATE = #{record.rate,jdbcType=DECIMAL},
+      SHORTEST_PERIOD = #{record.shortestPeriod,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

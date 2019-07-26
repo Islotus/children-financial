@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czbank.children_financial_v100.mapper.CardInfMapper">
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.CardInf">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="CARD_NBR" jdbcType="VARCHAR" property="cardNbr" />
+    <result column="CARD_PRO_NAME" jdbcType="VARCHAR" property="cardProName" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="PAY_PW" jdbcType="VARCHAR" property="payPw" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="BASE_RATE" jdbcType="DECIMAL" property="baseRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    CARD_ID, USER_ID, ID_CARD, CARD_NBR, CARD_PRO_NAME, CARD_TYPE, PAY_PW, AMT, BASE_RATE
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update card_inf
+    <set>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNbr != null">
+        CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardProName != null">
+        CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPw != null">
+        PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.baseRate != null">
+        BASE_RATE = #{record.baseRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update card_inf
+    set CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      BASE_RATE = #{record.baseRate,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.CardInf">
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="CARD_NBR" jdbcType="VARCHAR" property="cardNbr" />
+    <result column="CARD_PRO_NAME" jdbcType="VARCHAR" property="cardProName" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="PAY_PW" jdbcType="VARCHAR" property="payPw" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="BASE_RATE" jdbcType="DECIMAL" property="baseRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CARD_ID, USER_ID, ID_CARD, CARD_NBR, CARD_PRO_NAME, CARD_TYPE, PAY_PW, AMT, BASE_RATE
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample">
+    delete from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf (CARD_ID, USER_ID, ID_CARD, 
+      CARD_NBR, CARD_PRO_NAME, CARD_TYPE, 
+      PAY_PW, AMT, BASE_RATE
+      )
+    values (#{cardId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{cardNbr,jdbcType=VARCHAR}, #{cardProName,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{payPw,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{baseRate,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="cardNbr != null">
+        CARD_NBR,
+      </if>
+      <if test="cardProName != null">
+        CARD_PRO_NAME,
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE,
+      </if>
+      <if test="payPw != null">
+        PAY_PW,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="baseRate != null">
+        BASE_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNbr != null">
+        #{cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProName != null">
+        #{cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payPw != null">
+        #{payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="baseRate != null">
+        #{baseRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultType="java.lang.Integer">
+    select count(*) from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update card_inf
+    <set>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNbr != null">
+        CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardProName != null">
+        CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPw != null">
+        PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.baseRate != null">
+        BASE_RATE = #{record.baseRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update card_inf
+    set CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      BASE_RATE = #{record.baseRate,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.CardInf">
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="CARD_NBR" jdbcType="VARCHAR" property="cardNbr" />
+    <result column="CARD_PRO_NAME" jdbcType="VARCHAR" property="cardProName" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="PAY_PW" jdbcType="VARCHAR" property="payPw" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="BASE_RATE" jdbcType="DECIMAL" property="baseRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CARD_ID, USER_ID, ID_CARD, CARD_NBR, CARD_PRO_NAME, CARD_TYPE, PAY_PW, AMT, BASE_RATE
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample">
+    delete from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf (CARD_ID, USER_ID, ID_CARD, 
+      CARD_NBR, CARD_PRO_NAME, CARD_TYPE, 
+      PAY_PW, AMT, BASE_RATE
+      )
+    values (#{cardId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{cardNbr,jdbcType=VARCHAR}, #{cardProName,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{payPw,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{baseRate,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="cardNbr != null">
+        CARD_NBR,
+      </if>
+      <if test="cardProName != null">
+        CARD_PRO_NAME,
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE,
+      </if>
+      <if test="payPw != null">
+        PAY_PW,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="baseRate != null">
+        BASE_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNbr != null">
+        #{cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProName != null">
+        #{cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payPw != null">
+        #{payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="baseRate != null">
+        #{baseRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultType="java.lang.Integer">
+    select count(*) from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update card_inf
+    <set>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNbr != null">
+        CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardProName != null">
+        CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPw != null">
+        PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.baseRate != null">
+        BASE_RATE = #{record.baseRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update card_inf
+    set CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      BASE_RATE = #{record.baseRate,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.CardInf">
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="CARD_NBR" jdbcType="VARCHAR" property="cardNbr" />
+    <result column="CARD_PRO_NAME" jdbcType="VARCHAR" property="cardProName" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="PAY_PW" jdbcType="VARCHAR" property="payPw" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="BASE_RATE" jdbcType="DECIMAL" property="baseRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CARD_ID, USER_ID, ID_CARD, CARD_NBR, CARD_PRO_NAME, CARD_TYPE, PAY_PW, AMT, BASE_RATE
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample">
+    delete from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf (CARD_ID, USER_ID, ID_CARD, 
+      CARD_NBR, CARD_PRO_NAME, CARD_TYPE, 
+      PAY_PW, AMT, BASE_RATE
+      )
+    values (#{cardId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{cardNbr,jdbcType=VARCHAR}, #{cardProName,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{payPw,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{baseRate,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="cardNbr != null">
+        CARD_NBR,
+      </if>
+      <if test="cardProName != null">
+        CARD_PRO_NAME,
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE,
+      </if>
+      <if test="payPw != null">
+        PAY_PW,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="baseRate != null">
+        BASE_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNbr != null">
+        #{cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProName != null">
+        #{cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payPw != null">
+        #{payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="baseRate != null">
+        #{baseRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultType="java.lang.Integer">
+    select count(*) from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update card_inf
+    <set>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNbr != null">
+        CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardProName != null">
+        CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPw != null">
+        PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.baseRate != null">
+        BASE_RATE = #{record.baseRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update card_inf
+    set CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      BASE_RATE = #{record.baseRate,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.CardInf">
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="CARD_NBR" jdbcType="VARCHAR" property="cardNbr" />
+    <result column="CARD_PRO_NAME" jdbcType="VARCHAR" property="cardProName" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="PAY_PW" jdbcType="VARCHAR" property="payPw" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="BASE_RATE" jdbcType="DECIMAL" property="baseRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CARD_ID, USER_ID, ID_CARD, CARD_NBR, CARD_PRO_NAME, CARD_TYPE, PAY_PW, AMT, BASE_RATE
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample">
+    delete from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf (CARD_ID, USER_ID, ID_CARD, 
+      CARD_NBR, CARD_PRO_NAME, CARD_TYPE, 
+      PAY_PW, AMT, BASE_RATE
+      )
+    values (#{cardId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{cardNbr,jdbcType=VARCHAR}, #{cardProName,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{payPw,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{baseRate,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="cardNbr != null">
+        CARD_NBR,
+      </if>
+      <if test="cardProName != null">
+        CARD_PRO_NAME,
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE,
+      </if>
+      <if test="payPw != null">
+        PAY_PW,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="baseRate != null">
+        BASE_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNbr != null">
+        #{cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProName != null">
+        #{cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payPw != null">
+        #{payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="baseRate != null">
+        #{baseRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultType="java.lang.Integer">
+    select count(*) from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update card_inf
+    <set>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNbr != null">
+        CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardProName != null">
+        CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPw != null">
+        PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.baseRate != null">
+        BASE_RATE = #{record.baseRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update card_inf
+    set CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      BASE_RATE = #{record.baseRate,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.CardInf">
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="CARD_NBR" jdbcType="VARCHAR" property="cardNbr" />
+    <result column="CARD_PRO_NAME" jdbcType="VARCHAR" property="cardProName" />
+    <result column="CARD_TYPE" jdbcType="VARCHAR" property="cardType" />
+    <result column="PAY_PW" jdbcType="VARCHAR" property="payPw" />
+    <result column="AMT" jdbcType="DECIMAL" property="amt" />
+    <result column="BASE_RATE" jdbcType="DECIMAL" property="baseRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CARD_ID, USER_ID, ID_CARD, CARD_NBR, CARD_PRO_NAME, CARD_TYPE, PAY_PW, AMT, BASE_RATE
+  </sql>
+  <select id="selectByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample">
+    delete from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf (CARD_ID, USER_ID, ID_CARD, 
+      CARD_NBR, CARD_PRO_NAME, CARD_TYPE, 
+      PAY_PW, AMT, BASE_RATE
+      )
+    values (#{cardId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{cardNbr,jdbcType=VARCHAR}, #{cardProName,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{payPw,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL}, #{baseRate,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.CardInf">
+    insert into card_inf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        CARD_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="cardNbr != null">
+        CARD_NBR,
+      </if>
+      <if test="cardProName != null">
+        CARD_PRO_NAME,
+      </if>
+      <if test="cardType != null">
+        CARD_TYPE,
+      </if>
+      <if test="payPw != null">
+        PAY_PW,
+      </if>
+      <if test="amt != null">
+        AMT,
+      </if>
+      <if test="baseRate != null">
+        BASE_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNbr != null">
+        #{cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProName != null">
+        #{cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="payPw != null">
+        #{payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="amt != null">
+        #{amt,jdbcType=DECIMAL},
+      </if>
+      <if test="baseRate != null">
+        #{baseRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.CardInfExample" resultType="java.lang.Integer">
+    select count(*) from card_inf
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update card_inf
+    <set>
+      <if test="record.cardId != null">
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNbr != null">
+        CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardProName != null">
+        CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payPw != null">
+        PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amt != null">
+        AMT = #{record.amt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.baseRate != null">
+        BASE_RATE = #{record.baseRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update card_inf
+    set CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      CARD_NBR = #{record.cardNbr,jdbcType=VARCHAR},
+      CARD_PRO_NAME = #{record.cardProName,jdbcType=VARCHAR},
+      CARD_TYPE = #{record.cardType,jdbcType=VARCHAR},
+      PAY_PW = #{record.payPw,jdbcType=VARCHAR},
+      AMT = #{record.amt,jdbcType=DECIMAL},
+      BASE_RATE = #{record.baseRate,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

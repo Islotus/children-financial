@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czbank.children_financial_v100.mapper.UserInfMapper" >
+  <resultMap id="BaseResultMap" type="com.czbank.children_financial_v100.model.UserInf" >
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="RELATED_ACCOUNT" property="relatedAccount" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="IS_PARENT" property="isParent" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR" />
+    <result column="PHONE_NBR" property="phoneNbr" jdbcType="VARCHAR" />
+    <result column="LOGIN_PW" property="loginPw" jdbcType="VARCHAR" />
+    <result column="OPEN_TIME" property="openTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, ACCOUNT, RELATED_ACCOUNT, NAME, IS_PARENT, ID_CARD, BIRTHDAY, PHONE_NBR, 
+    LOGIN_PW, OPEN_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.czbank.children_financial_v100.model.UserInfExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_inf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.czbank.children_financial_v100.model.UserInfExample" >
+    delete from user_inf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.czbank.children_financial_v100.model.UserInf" >
+    insert into user_inf (USER_ID, ACCOUNT, RELATED_ACCOUNT, 
+      NAME, IS_PARENT, ID_CARD, 
+      BIRTHDAY, PHONE_NBR, LOGIN_PW, 
+      OPEN_TIME)
+    values (#{userId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{relatedAccount,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{isParent,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{phoneNbr,jdbcType=VARCHAR}, #{loginPw,jdbcType=VARCHAR}, 
+      #{openTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czbank.children_financial_v100.model.UserInf" >
+    insert into user_inf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="relatedAccount != null" >
+        RELATED_ACCOUNT,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="isParent != null" >
+        IS_PARENT,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="phoneNbr != null" >
+        PHONE_NBR,
+      </if>
+      <if test="loginPw != null" >
+        LOGIN_PW,
+      </if>
+      <if test="openTime != null" >
+        OPEN_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedAccount != null" >
+        #{relatedAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null" >
+        #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNbr != null" >
+        #{phoneNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPw != null" >
+        #{loginPw,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.czbank.children_financial_v100.model.UserInfExample" resultType="java.lang.Integer" >
+    select count(*) from user_inf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_inf
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relatedAccount != null" >
+        RELATED_ACCOUNT = #{record.relatedAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isParent != null" >
+        IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        BIRTHDAY = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNbr != null" >
+        PHONE_NBR = #{record.phoneNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginPw != null" >
+        LOGIN_PW = #{record.loginPw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openTime != null" >
+        OPEN_TIME = #{record.openTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_inf
+    set USER_ID = #{record.userId,jdbcType=VARCHAR},
+      ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      RELATED_ACCOUNT = #{record.relatedAccount,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      BIRTHDAY = #{record.birthday,jdbcType=VARCHAR},
+      PHONE_NBR = #{record.phoneNbr,jdbcType=VARCHAR},
+      LOGIN_PW = #{record.loginPw,jdbcType=VARCHAR},
+      OPEN_TIME = #{record.openTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
