@@ -8,17 +8,17 @@ import java.util.Map;
 
 public interface UserInfService {
     //0insert
-    public int userInfoInsert(UserInf tblUserInfo);
+    public int userInfInsert(UserInf tblUserInf);
     //1delete
-    public int userInfoDelete(int userId);
+    public int userInfDelete(int userId);
     //2update
-    public int userInfoUpdate(UserInf tblUserInfo);
+    public int userInfUpdate(UserInf tblUserInf);
     //3selectOne
-    public UserInf userInfoSelectOne(UserInf tblUserInfo);
+    public UserInf userInfSelectOne(UserInf tblUserInf);
     //4selectAll
-    public List<UserInf> userInfoSelectAll(int np, int size);
+    public List<UserInf> userInfSelectAll(int np, int size);
     //登录，根据账户密码查询，返回user_inf的信息
     public Map selectByAccountPw(UserInf userInf);
-
-
+    //注册
+    public int register(UserInf userInf);
 }
