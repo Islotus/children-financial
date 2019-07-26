@@ -4,6 +4,7 @@ import com.czbank.childrenfinancial.po.LsInf;
 import com.czbank.childrenfinancial.po.UserInf;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserManagementService {
     //个人基本信息查询-ok
@@ -14,7 +15,7 @@ public interface UserManagementService {
 
 
     //余额查询:卡余额+理财产品余额
-    public String getRemainAmt(String account);
+    public Map<String, String> getRemainAmt(String account);
 
     //流水明细查询
     List<LsInf> queryLsDetail(String account, int pageNum, int pageSize);

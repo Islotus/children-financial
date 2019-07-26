@@ -1,11 +1,14 @@
 package com.czbank.childrenfinancial.dao;
 
+import com.czbank.childrenfinancial.mapper.BusiInfMapper;
 import com.czbank.childrenfinancial.mapper.CardInfMapper;
 import com.czbank.childrenfinancial.mapper.LsInfMapper;
 import com.czbank.childrenfinancial.mapper.UserInfMapper;
+import com.czbank.childrenfinancial.po.BusiInf;
 import com.czbank.childrenfinancial.po.CardInf;
 import com.czbank.childrenfinancial.po.LsInf;
 import com.czbank.childrenfinancial.po.UserInf;
+import com.netflix.discovery.converters.Auto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +29,9 @@ public class UserMngDao {
 
     @Autowired
     CardInfMapper cardInfMapper;
+
+    @Autowired
+    BusiInfMapper busiInfMapper;
 
     public UserInf getUserInfByAcctAndPw(String account, String password) {
 
@@ -75,6 +81,22 @@ public class UserMngDao {
 
     public void settleCardNbr(CardInf cardInf) {
         cardInfMapper.insertSelective(cardInf);
+    }
+
+    public CardInf getCardInfByUserId(String userId) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new RuntimeException("用户编号为空");
+        }
+
+        return cardInfMapper.getCardInfByCardNbr(userId);
+    }
+
+    public BusiInf getBusiInfByUserId(String userId) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new RuntimeException("用户编号为空");
+        }
+
+        return busiInfMapper.getBusiInfByUserId(userId);
     }
 
 }
