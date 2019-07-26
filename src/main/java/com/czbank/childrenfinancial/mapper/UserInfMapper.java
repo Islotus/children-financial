@@ -42,8 +42,11 @@ public interface UserInfMapper extends Mapper<UserInf> {
     @Select("update user_inf set LOGIN_PW=#{loginPw} where ACCOUNT=#{account}")
     void updateLoginPw(String account, String loginPw);
 
+    @Select("select count(*) from user_inf where ID_CARD = #{idCard}")
+    public int hasAccount(UserInf userInf);
+
     //注册 register
-    @Insert("insert into user_inf(userId,account,relatedAccount,name,isParent,idCard,birthday,phoneNbr,loginPw,openTime)" +
+    @Insert("insert into user_inf(USER_ID,ACCOUNT,RELATED_ACCOUNT,NAME,IS_PARENT,ID_CARD,BIRTHDAY,PHONE_NBR,LOGIN_PW,OPEN_TIME)" +
             "values(#{userId},#{account},#{relatedAccount},#{name},#{isParent},#{idCard},#{birthday},#{phoneNbr},#{loginPw},#{openTime})")
     public int register(UserInf userInf);
 
