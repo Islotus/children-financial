@@ -1,9 +1,12 @@
 package com.czbank.childrenfinancial.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.czbank.childrenfinancial.dao.UserMngDao;
 import com.czbank.childrenfinancial.mapper.UserInfMapper;
 import com.czbank.childrenfinancial.po.UserInf;
 import com.czbank.childrenfinancial.service.UserInfService;
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class UserInfServiceImpl implements UserInfService {
     @Autowired
     private UserInfMapper userInfMapper;
+
+    @Autowired
+    private UserMngDao userMngDao;
 
 
     @Override
@@ -56,6 +63,6 @@ public class UserInfServiceImpl implements UserInfService {
     }
     @Override
     public int register(UserInf userInf){
-        return userInfMapper.register(userInf);
+        return userMngDao.register(userInf);
     }
 }

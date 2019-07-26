@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.czbank.childrenfinancial.po.UserInf;
 import com.czbank.childrenfinancial.postput.LoginIn;
 import com.czbank.childrenfinancial.service.UserInfService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+@Slf4j
 @CrossOrigin
 @RestController
 public class UserInfController {
@@ -124,6 +127,7 @@ public class UserInfController {
             session.setAttribute("account",account);
         }
         System.out.println(session.getAttribute("account"));
+
         return reMap;
     }
 
@@ -146,6 +150,7 @@ public class UserInfController {
         userInf.setIdCard(idCard);
         System.out.println(userInf);
         //处理
+        log.info("controller: " + userInf);
         return userInfService.register(userInf);
     }
 }
