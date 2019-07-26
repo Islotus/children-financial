@@ -1,9 +1,12 @@
 package com.czbank.childrenfinancial.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.czbank.childrenfinancial.dao.UserMngDao;
 import com.czbank.childrenfinancial.mapper.UserInfMapper;
 import com.czbank.childrenfinancial.po.UserInf;
 import com.czbank.childrenfinancial.service.UserInfService;
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,40 +14,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class UserInfServiceImpl implements UserInfService {
     @Autowired
-    private UserInfMapper userInfoMapper;
+    private UserInfMapper userInfMapper;
+
+    @Autowired
+    private UserMngDao userMngDao;
 
 
     @Override
-    public int userInfoInsert(UserInf UserInf) {
-        return userInfoMapper.userInfoInsert(UserInf);
+    public int userInfInsert(UserInf UserInf) {
+        return userInfMapper.userInfInsert(UserInf);
     }
 
     @Override
-    public int userInfoDelete(int userId) {
-        return userInfoMapper.userInfoDelete(userId);
+    public int userInfDelete(int userId) {
+        return userInfMapper.userInfDelete(userId);
     }
 
     @Override
-    public int userInfoUpdate(UserInf UserInf) {
-        return userInfoMapper.userInfoUpdate(UserInf);
+    public int userInfUpdate(UserInf UserInf) {
+        return userInfMapper.userInfUpdate(UserInf);
     }
 
     @Override
-    public UserInf userInfoSelectOne(UserInf UserInf) {
+    public UserInf userInfSelectOne(UserInf UserInf) {
         System.out.println("service-impl");
-        return userInfoMapper.userInfoSelectOne(UserInf);
+        return userInfMapper.userInfSelectOne(UserInf);
     }
 
     @Override
-    public List<UserInf> userInfoSelectAll(int np, int size) {
-        return userInfoMapper.userInfoSelectAll((np-1)*size,size);
+    public List<UserInf> userInfSelectAll(int np, int size) {
+        return userInfMapper.userInfSelectAll((np-1)*size,size);
     }
     @Override
     public Map selectByAccountPw(UserInf userInf) {
-        UserInf uf = userInfoMapper.selectByAccountPw(userInf);
+        UserInf uf = userInfMapper.selectByAccountPw(userInf);
         Map<Object, Object> reMap = new HashMap<>();
         if(uf != null) {
             reMap.put("user", uf);
@@ -53,5 +60,9 @@ public class UserInfServiceImpl implements UserInfService {
             reMap.put("status","1");
         }
         return reMap;
+    }
+    @Override
+    public int register(UserInf userInf){
+        return userMngDao.register(userInf);
     }
 }

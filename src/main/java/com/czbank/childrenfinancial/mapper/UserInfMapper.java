@@ -14,19 +14,19 @@ public interface UserInfMapper extends Mapper<UserInf> {
     //0insert
     @Insert("insert into user_inf(userId,account,relatedAccount,name,isParent,idCard,birthday,phoneNbr,loginPw,openTime)" +
             "values(#{userId},#{account},#{relatedAccount},#{name},#{isParent},#{idCard},#{birthday},#{phoneNbr},#{loginPw},#{openTime})")
-    public int userInfoInsert(UserInf userInf);
+    public int userInfInsert(UserInf userInf);
     //1delete
     @Delete("delete from user_inf where userId = #{userId}")
-    public int userInfoDelete(int userId);
+    public int userInfDelete(int userId);
     //2update
     @Update("update user_inf set account = #{account} where userId = #{userId}")
-    public int userInfoUpdate(UserInf userInf);
+    public int userInfUpdate(UserInf userInf);
     //3selectOne
     @Select("select * from user_inf where USER_ID = #{userId} and ACCOUNT = #{account} limit 1")
-    public UserInf userInfoSelectOne(UserInf userInf);
+    public UserInf userInfSelectOne(UserInf userInf);
     //4selectAll
     @Select("select * from user_inf order by userId desc limit #{np},#{size}")
-    public List<UserInf> userInfoSelectAll(@Param("np") int np, @Param("size") int size);
+    public List<UserInf> userInfSelectAll(@Param("np") int np, @Param("size") int size);
 
     //登录，根据账户密码查询，返回user_inf的信息
     @Select("select * from user_inf where ACCOUNT = #{account} and LOGIN_PW = #{loginPw} limit 1")
@@ -41,6 +41,14 @@ public interface UserInfMapper extends Mapper<UserInf> {
 
     @Select("update user_inf set LOGIN_PW=#{loginPw} where ACCOUNT=#{account}")
     void updateLoginPw(String account, String loginPw);
+
+    @Select("select count(*) from user_inf where ID_CARD = #{idCard}")
+    public int hasAccount(UserInf userInf);
+
+    //注册 register
+    @Insert("insert into user_inf(USER_ID,ACCOUNT,RELATED_ACCOUNT,NAME,IS_PARENT,ID_CARD,BIRTHDAY,PHONE_NBR,LOGIN_PW,OPEN_TIME)" +
+            "values(#{userId},#{account},#{relatedAccount},#{name},#{isParent},#{idCard},#{birthday},#{phoneNbr},#{loginPw},#{openTime})")
+    public int register(UserInf userInf);
 
 
 

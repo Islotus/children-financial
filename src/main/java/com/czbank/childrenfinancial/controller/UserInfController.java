@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.czbank.childrenfinancial.po.UserInf;
 import com.czbank.childrenfinancial.postput.LoginIn;
 import com.czbank.childrenfinancial.service.UserInfService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+@Slf4j
 @CrossOrigin
 @RestController
 public class UserInfController {
     @Autowired
-    private UserInfService userInfoService;
+    private UserInfService userInfService;
     //0insert
     @RequestMapping("/UserInfoInsert")
     public Object userInfoInsert(HttpServletRequest req, HttpServletResponse resp) {
@@ -32,10 +35,10 @@ public class UserInfController {
         String phoneNbr = req.getParameter("phoneNbr");
         String loginPw = req.getParameter("loginPw");
         String openTime = req.getParameter("openTime");
-        UserInf UserInf = null;
+        UserInf userInf = null;
         //封装
         try {
-            UserInf = new UserInf(
+            userInf = new UserInf(
                     userId,
                     account,
                     relatedAccount,
@@ -50,61 +53,61 @@ public class UserInfController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(UserInf);
+        System.out.println(userInf);
         //处理
-        return userInfoService.userInfoInsert(UserInf);
+        return userInfService.userInfInsert(userInf);
     }
 
     //1delete
-    @RequestMapping("/userInfoDelete")
-    public Object userInfoDelete(HttpServletRequest req, HttpServletResponse resp) {
+    @RequestMapping("/userInfDelete")
+    public Object userInfDelete(HttpServletRequest req, HttpServletResponse resp) {
         //接受
         String userId = req.getParameter("userId");
         UserInf UserInf = null;
         //封装
         //处理
-        return userInfoService.userInfoDelete(Integer.parseInt(userId));
+        return userInfService.userInfDelete(Integer.parseInt(userId));
     }
 
     //2update
-    @RequestMapping("/userInfoUpdate")
-    public Object userInfoUpdate(HttpServletRequest req, HttpServletResponse resp) {
+    @RequestMapping("/userInfUpdate")
+    public Object userInfUpdate(HttpServletRequest req, HttpServletResponse resp) {
         //接受
         String userId = req.getParameter("userId");
         String account = req.getParameter("account");
-        UserInf tblUserInfo = new UserInf();
-        tblUserInfo.setUserId(userId);
-        tblUserInfo.setAccount(account);
+        UserInf tblUserInf = new UserInf();
+        tblUserInf.setUserId(userId);
+        tblUserInf.setAccount(account);
         //封装
         //处理
-        return userInfoService.userInfoUpdate(tblUserInfo);
+        return userInfService.userInfUpdate(tblUserInf);
     }
 
     //3selectOne
-    @RequestMapping(value = "/userInfoSelectOne", method = RequestMethod.POST)
-    public Object userInfoSelectOne(@RequestBody LoginIn login) {
+    @RequestMapping(value = "/userInfSelectOne", method = RequestMethod.POST)
+    public Object userInfSelectOne(@RequestBody LoginIn login) {
         //接受
         String userId = login.getUserId();
         String account = login.getAccount();
-        UserInf UserInf = new UserInf();
-        UserInf.setUserId(userId);
-        UserInf.setAccount(account);
+        UserInf userInf = new UserInf();
+        userInf.setUserId(userId);
+        userInf.setAccount(account);
         //封装
         //处理
         System.out.println("controller");
-        return JSON.toJSONString(userInfoService.userInfoSelectOne(UserInf));
+        return JSON.toJSONString(userInfService.userInfSelectOne(userInf));
     }
 
     //4selectAll
-    @RequestMapping(value = "/userInfoSelectAll")
-    public Object userInfoSelectAll(HttpServletRequest req, HttpServletResponse resp) {
+    @RequestMapping(value = "/userInfSelectAll")
+    public Object userInfSelectAll(HttpServletRequest req, HttpServletResponse resp) {
         //接受
         String np = req.getParameter("np");
         String size = req.getParameter("size");
-        UserInf tblUserInfo = new UserInf();
+        UserInf tblUserInf = new UserInf();
         //封装
         //处理
-        return JSON.toJSONString(userInfoService.userInfoSelectAll(Integer.parseInt(np),Integer.parseInt(size)));
+        return JSON.toJSONString(userInfService.userInfSelectAll(Integer.parseInt(np),Integer.parseInt(size)));
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Object selectByAccountPw(@RequestBody LoginIn login,HttpServletRequest request) {
@@ -115,16 +118,39 @@ public class UserInfController {
         userInf.setAccount(account);
         userInf.setLoginPw(loginPw);
         //处理
-//        return JSON.toJSONString(userInfoService.selectByAccountPw(userInf));
+//        return JSON.toJSONString(userInfService.selectByAccountPw(userInf));
         HttpSession session = request.getSession();
         session.setAttribute("account",null);
-        Map<Object,Object> reMap = userInfoService.selectByAccountPw((userInf));
+        Map<Object,Object> reMap = userInfService.selectByAccountPw((userInf));
         boolean flag = ((String)(reMap.get("status"))).equals("0");
         if(flag){
             session.setAttribute("account",account);
         }
         System.out.println(session.getAttribute("account"));
-        return reMap;
 
+        return reMap;
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public int register(@RequestBody LoginIn login) {
+        //接受
+        String account = login.getAccount(); //账号
+        String loginPw = login.getLoginPw();  //密码
+        String name = login.getName();
+        String birth = login.getBirth();
+        String phone = login.getPhone();
+        String idCard = login.getIdCard();
+        //封装
+        UserInf userInf = new UserInf();
+        userInf.setAccount(account);
+        userInf.setLoginPw(loginPw);
+        userInf.setName(name);
+        userInf.setBirthday(birth);
+        userInf.setPhoneNbr(phone);
+        userInf.setIdCard(idCard);
+        System.out.println(userInf);
+        //处理
+        log.info("controller: " + userInf);
+        return userInfService.register(userInf);
     }
 }
