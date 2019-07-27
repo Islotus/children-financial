@@ -14,4 +14,6 @@ public interface FinancialOpsService {
 
 //    增加流水记录
     void addRecord(String fromAccount,String toAccount,Double amount);
+
+    void testGetDate();
 }

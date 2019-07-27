@@ -1,11 +1,15 @@
 package com.czbank.childrenfinancial.service.impl;
 
 import com.czbank.childrenfinancial.mapper.FinProductInfMapper;
+import com.czbank.childrenfinancial.mapper.FinancialOpsMapper;
 import com.czbank.childrenfinancial.po.FinProductInf;
 import com.czbank.childrenfinancial.service.FinProductInfService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +19,8 @@ public class FinProductInfServiceImpl implements FinProductInfService {
 
     @Autowired
     private FinProductInfMapper productMapper;
+    @Autowired
+    private FinancialOpsMapper financialOpsMapper;
 
     public Map getProductInfo(String account){
         String riskLevel = productMapper.getIsParent(account);
@@ -42,6 +48,34 @@ public class FinProductInfServiceImpl implements FinProductInfService {
         }
         else reMap.put("status","1");
         return reMap;
+    }
+
+    @Override
+    @Transactional
+    public int purchaseProduct(String card,String prodId, Double amount, String period) {
+
+//        如果购买金额大于余额，则返回失败
+        Double balance = financialOpsMapper.getAmt(card);
+        if(balance < amount) return -1;
+
+//        更新余额（购买扣款）
+        financialOpsMapper.expenseUpdate(card, amount);
+
+        String busiId = FinancialOpsServiceImpl.generateId(8);
+        String userId = productMapper.getUserIdByCard(card);
+        Date updateTime = new Date(System.currentTimeMillis());
+        Date startTime = new Date(System.currentTimeMillis());
+        String prodType = productMapper.getProdTypeByProdId(prodId);
+        int periodDayNum = 0;
+        switch (period){
+            case "每周":periodDayNum = 7; break;
+            case "每两周":periodDayNum = 14; break;
+            case "每月":periodDayNum = 30; break;
+            case "每季度":periodDayNum = 90; break;
+            case "每年":periodDayNum = 365;
+        }
+        productMapper.purchaseProduct(busiId,userId,prodId,amount,updateTime,prodType,startTime,periodDayNum);
+        return 0;
     }
 
 }

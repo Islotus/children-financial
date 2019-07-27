@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@RequestMapping(value = "/userMng")
 public class UserMngController {
     @Autowired
     UserManagementService userManagementService;
