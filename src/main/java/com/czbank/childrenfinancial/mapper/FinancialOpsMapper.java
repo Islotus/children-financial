@@ -19,7 +19,7 @@ public interface FinancialOpsMapper {
     @Select("select CARD_NBR from card_inf where USER_ID = (select USER_ID from user_inf where ACCOUNT = #{account})")
     List<String> getCardsByAccount(String account);
 
-//    查询余额
+//    根据 卡号 查询余额
     @Select("select AMT from CARD_INF where CARD_NBR = #{card}")
     double getAmt(String card);
 

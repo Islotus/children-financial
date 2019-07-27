@@ -67,7 +67,7 @@ public class FinancialOpsServiceImpl implements FinancialOpsService {
         financialOpsMapper.addTransRecord(generateId(8),toAccount,fromAccount,toCard,fromCard,amount,financialOpsMapper.getAmt(toCard),"01",genDate);
     }
 
-    public String generateId(int length){
+    public static String generateId(int length){
         long id = SnowFlake.nextId();
         String idString = id + "";
         return idString.substring(idString.length()-length,idString.length());

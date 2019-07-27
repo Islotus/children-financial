@@ -4,5 +4,6 @@ import java.util.Map;
 
 public interface FinProductInfService {
 
-    public Map getProductInfo(String account);
+    Map getProductInfo(String account);
+    int purchaseProduct(String card,String prodId,Double amount,String period);
 }

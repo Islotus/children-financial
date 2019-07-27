@@ -2,10 +2,16 @@ package com.czbank.childrenfinancial.po;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 public class UserInf {
     //0定义字段
+
+
     private String userId;
     private String account;
     private String relatedAccount;
