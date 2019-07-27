@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 @CrossOrigin
 @RestController
+@RequestMapping(value = "/finProd")
 public class FinProductInfController {
 
     @Autowired
@@ -28,7 +29,7 @@ public class FinProductInfController {
         return reMap;
     }
 
-    @RequestMapping(value = "purchaseProduct")
+    @RequestMapping(value = "/purchaseProduct")
     public Object purchaseProduct(@RequestBody ProdBuyInfo prodBuyInfo){
         String card = prodBuyInfo.getCard();
         String prodId = prodBuyInfo.getProdId();
@@ -36,9 +37,8 @@ public class FinProductInfController {
         Double amount = Double.parseDouble(amountStr);
         String period = prodBuyInfo.getPeriod();
 
-        int resultStatus= productService.purchaseProduct(card,prodId,amount,period);
-
-
+        int r = productService.purchaseProduct(card,prodId,amount,period);
+        String resultStatus = String.valueOf(r);
 
         return resultStatus;
     }

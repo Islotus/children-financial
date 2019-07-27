@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.Transient;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class FinancialOpsServiceImpl implements FinancialOpsService {
 
     @Override
     @Transactional
-//    返回0代表成功转账，返回-1代表余额不足，返回-2代表转出户不存在
+//    返回0代表成功转账，返回-1代表余额不足，返回-2代表转出户不存在,返回-3代表今日额度已经用完
     public int transAccount(String fromCard, String toCard, Double amount) {
 
         double fromAmt = financialOpsMapper.getAmt(fromCard);
@@ -35,6 +36,10 @@ public class FinancialOpsServiceImpl implements FinancialOpsService {
         int isCardExisted = financialOpsMapper.isCardExisted(toCard);
         if(isCardExisted == 0) return -2;
 
+        boolean ile = isLimitEnough(fromCard,amount);
+        if(!ile) return -3;
+
+//        没有任何逻辑错误，正常完成转账操作
 //        在数据库中更新数据，并保存流水记录
         expense(fromCard, amount);
         income(toCard,amount);
@@ -71,5 +76,29 @@ public class FinancialOpsServiceImpl implements FinancialOpsService {
         long id = SnowFlake.nextId();
         String idString = id + "";
         return idString.substring(idString.length()-length,idString.length());
+    }
+
+//    根据卡号判断限额是否足够
+    private boolean isLimitEnough(String card,Double amount){
+
+        double limit = financialOpsMapper.getLimit(card);
+        if(limit == -1.0) return true;//如果没有限制，直接返回限额足够
+
+        double hasUsed = financialOpsMapper.getHasUsedAmountLimit(card);//已用额度
+        double rest = limit - hasUsed;//剩余额度
+        if(amount > rest) return false;
+        return true;
+    }
+
+//    测试获取date日期并打印
+    public void testGetDate(){
+        String id = "XXLCJ001";
+        Date d = financialOpsMapper.getDate(id);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(d);
+        int day = calendar.get(calendar.DATE);
+
+        System.out.println(d);
+        System.out.println(day);
     }
 }

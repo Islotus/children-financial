@@ -43,5 +43,16 @@ public interface FinancialOpsMapper {
     @Insert("insert into ls_inf values (#{id},#{fromAccount},#{toAccount},#{status},#{amt},#{remainAmt},#{date},#{fromCard},#{toCard});")
     void addTransRecord(String id,String fromAccount, String toAccount, String fromCard, String toCard, Double amt, Double remainAmt, String status, Date date);
 
+//    查询今日已用额度
+    @Select("select sum(AMT) from ls_inf where ownCardNbr = #{card} and `STATUS` = '00' and date(ADD_TIME) = curdate();")
+    Double getHasUsedAmountLimit(String card);
+
+//    查询限额
+    @Select("select `limit` from card_inf where CARD_NBR = #{card};")
+    Double getLimit(String card);
+
+//    根据流水ID查询流水发生时间
+    @Select("select ADD_TIME from ls_inf where BUSI_ACCEPT_ID = #{id}")
+    Date getDate(String id);
 
 }
