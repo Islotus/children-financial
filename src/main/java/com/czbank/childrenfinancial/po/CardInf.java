@@ -64,6 +64,12 @@ public class CardInf {
     private BigDecimal baseRate;
 
     /**
+     * 每日消费最高限额
+     */
+    @Column(name = "limit")
+    private BigDecimal limit;
+
+    /**
      * 获取卡编号
      *
      * @return CARD_ID - 卡编号
@@ -223,5 +229,23 @@ public class CardInf {
      */
     public void setBaseRate(BigDecimal baseRate) {
         this.baseRate = baseRate;
+    }
+
+    /**
+     * 获取单日最高转账限额
+     *
+     * @return limit - 单日最高转账限额
+     */
+    public BigDecimal getLimit() {
+        return limit;
+    }
+
+    /**
+     * 设置基础利率
+     *
+     * @param limit 单日最高转账限额
+     */
+    public void setLimit(BigDecimal limit) {
+        this.limit = limit;
     }
 }

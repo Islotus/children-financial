@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -97,6 +98,14 @@ public class UserMngDao {
         }
 
         return busiInfMapper.getBusiInfByUserId(userId);
+    }
+
+    public void setLimitByUserId(String userId, BigDecimal limit) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new RuntimeException("用户编号为空");
+        }
+
+        cardInfMapper.updateLimitByUserId(userId, limit);
     }
 
 }
