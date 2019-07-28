@@ -3,6 +3,7 @@ package com.czbank.childrenfinancial.controller;
 import com.czbank.childrenfinancial.postput.LoginIn;
 import com.czbank.childrenfinancial.postput.TransInfo;
 import com.czbank.childrenfinancial.service.FinancialOpsService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ public class FinancialOpsController {
     private FinancialOpsService financialOpsService;
 
     @RequestMapping(value = "/getCardsByAccount")
+    @ApiOperation(value = "查询理财产品",notes = "根据用户账号查询理财产品")
     public Object getCardsByAccount(@RequestBody LoginIn loginIn){
         String account = loginIn.getAccount();
         List<String> cards = financialOpsService.getCardsByAccount(account);
@@ -26,6 +28,7 @@ public class FinancialOpsController {
     }
 
     @RequestMapping(value = "/transProcess")
+    @ApiOperation(value = "转账",notes = "用户转账")
     public Object transProcess(@RequestBody TransInfo transInfo){
         String fromCard = transInfo.getFromCard();
         String toCard = transInfo.getToCard();
