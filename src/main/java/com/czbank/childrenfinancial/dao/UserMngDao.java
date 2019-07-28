@@ -1,8 +1,7 @@
 package com.czbank.childrenfinancial.dao;
 
-
-import com.czbank.childrenfinancial.mapper.BusiInfMapper;
 import com.czbank.childrenfinancial.Utils.SnowFlake;
+import com.czbank.childrenfinancial.mapper.BusiInfMapper;
 import com.czbank.childrenfinancial.mapper.CardInfMapper;
 import com.czbank.childrenfinancial.mapper.LsInfMapper;
 import com.czbank.childrenfinancial.mapper.UserInfMapper;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -87,7 +87,6 @@ public class UserMngDao {
     public void settleCardNbr(CardInf cardInf) {
         cardInfMapper.insertSelective(cardInf);
     }
-
 
     public CardInf getCardInfByUserId(String userId) {
         if (StringUtils.isEmpty(userId)) {
@@ -165,5 +164,14 @@ public class UserMngDao {
         }
         return ret;
     }
+
+    public void setLimitByUserId(String userId, BigDecimal limit) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new RuntimeException("用户编号为空");
+        }
+
+        cardInfMapper.updateLimitByUserId(userId, limit);
+    }
+
 
 }
