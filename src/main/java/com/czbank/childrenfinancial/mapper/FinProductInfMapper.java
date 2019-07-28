@@ -1,9 +1,12 @@
 package com.czbank.childrenfinancial.mapper;
 
 
+import com.czbank.childrenfinancial.po.BusiInf;
 import com.czbank.childrenfinancial.po.FinProductInf;
+import com.czbank.childrenfinancial.po.SchedulerParams;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -28,8 +31,17 @@ public interface FinProductInfMapper {
 //    根据产品编号查询产品类型
     @Select("select product_type from fin_product_inf where PRODUCT_ID = #{prodId}")
     String getProdTypeByProdId(String prodId);
+
 //    购买理财产品
-    @Select("insert into busi_inf values (#{busiId},#{userId},#{prodId},#{amount},#{updateTime},#{prodType},#{startTime},#{periodDayNum})")
-    void purchaseProduct(String busiId, String userId, String prodId, Double amount, Date updateTime, String prodType, Date startTime, int periodDayNum);
+    @Select("insert into busi_inf values (#{busiId},#{userId},#{prodId},#{amount},#{updateTime},#{prodType},#{startTime},#{periodDayNum},#{amount},#{card})")
+    void purchaseProduct(String busiId, String userId, String prodId, Double amount, Date updateTime, String prodType, Date startTime, int periodDayNum,String card);
+
+//    定时器所需参数查询
+    @Select("select BUSI_ID,USER_ID,AMT,curdate() - date(UPD_TIME) as timediff,time_period,CARD_NBR from busi_inf")
+    List<SchedulerParams> getParams1();
+
+//    定投更新操作,再次购买理财产品
+    @Update("update busi_inf set sum_amt = sum_amt + #{amt} where BUSI_ID = #{busiId}")
+    void purchaseProdAgain(String busiId,double amt);
 
 }

@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("financialOpsService")
 public class FinancialOpsServiceImpl implements FinancialOpsService {
 
     @Autowired

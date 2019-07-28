@@ -43,4 +43,9 @@ public class FinProductInfController {
         return resultStatus;
     }
 
+    @RequestMapping(value = "testparams")
+    public void testparams(){
+        productService.testparams();
+    }
+
 }

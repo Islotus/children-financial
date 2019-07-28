@@ -3,6 +3,7 @@ package com.czbank.childrenfinancial.service.impl;
 import com.czbank.childrenfinancial.mapper.FinProductInfMapper;
 import com.czbank.childrenfinancial.mapper.FinancialOpsMapper;
 import com.czbank.childrenfinancial.po.FinProductInf;
+import com.czbank.childrenfinancial.po.SchedulerParams;
 import com.czbank.childrenfinancial.service.FinProductInfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("finProductInfService")
 public class FinProductInfServiceImpl implements FinProductInfService {
 
     @Autowired
@@ -67,15 +68,36 @@ public class FinProductInfServiceImpl implements FinProductInfService {
         Date startTime = new Date(System.currentTimeMillis());
         String prodType = productMapper.getProdTypeByProdId(prodId);
         int periodDayNum = 0;
-        switch (period){
-            case "每周":periodDayNum = 7; break;
-            case "每两周":periodDayNum = 14; break;
-            case "每月":periodDayNum = 30; break;
-            case "每季度":periodDayNum = 90; break;
-            case "每年":periodDayNum = 365;
+        if(period != null) {
+            switch (period) {
+                case "每周":
+                    periodDayNum = 7;
+                    break;
+                case "每两周":
+                    periodDayNum = 14;
+                    break;
+                case "每月":
+                    periodDayNum = 30;
+                    break;
+                case "每季度":
+                    periodDayNum = 90;
+                    break;
+                case "每年":
+                    periodDayNum = 365;
+                    break;
+                default:
+                    periodDayNum = 0;
+            }
         }
-        productMapper.purchaseProduct(busiId,userId,prodId,amount,updateTime,prodType,startTime,periodDayNum);
+        productMapper.purchaseProduct(busiId,userId,prodId,amount,updateTime,prodType,startTime,periodDayNum,card);
         return 0;
+    }
+
+    public List<SchedulerParams> testparams(){
+        List<SchedulerParams> paramsList = productMapper.getParams1();
+        System.out.println(paramsList);
+
+        return paramsList;
     }
 
 }

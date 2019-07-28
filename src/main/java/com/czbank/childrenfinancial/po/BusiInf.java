@@ -59,6 +59,13 @@ public class BusiInf {
     private int timePeriod;
 
     /**
+     * 卡号
+     */
+    @Column(name = "CARD_NBR")
+    private int cardNbr;
+
+
+    /**
      * 获取业务编号
      *
      * @return BUSI_ID - 业务编号
@@ -146,5 +153,37 @@ public class BusiInf {
      */
     public void setUpdTime(Date updTime) {
         this.updTime = updTime;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public int getTimePeriod() {
+        return timePeriod;
+    }
+
+    public void setTimePeriod(int timePeriod) {
+        this.timePeriod = timePeriod;
+    }
+
+    public int getCardNbr() {
+        return cardNbr;
+    }
+
+    public void setCardNbr(int cardNbr) {
+        this.cardNbr = cardNbr;
     }
 }
