@@ -3,7 +3,7 @@ package com.czbank.childrenfinancial.postput;
 public class TransInfo {
     String fromCard;
     String toCard;
-    Double amount;
+    String amount;
 
     public String getFromCard() {
         return fromCard;
@@ -21,11 +21,11 @@ public class TransInfo {
         this.toCard = toCard;
     }
 
-    public Double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 }
