@@ -38,10 +38,12 @@ public class FinancialOpsController {
     public Object transProcess(@RequestBody TransInfo transInfo){
         String fromCard = transInfo.getFromCard();
         String toCard = transInfo.getToCard();
-        Double amount = transInfo.getAmount();
+        String amountStr = transInfo.getAmount();
+        Double amount = Double.parseDouble(amountStr);
 
         System.out.println(fromCard + "-" + toCard + "-" + amount);
-        int resultStatus = financialOpsService.transAccount(fromCard, toCard, amount);
+        int r = financialOpsService.transAccount(fromCard, toCard, amount);
+        String resultStatus = String.valueOf(r);
         return resultStatus;
     }
 
