@@ -1,5 +1,6 @@
 package com.czbank.childrenfinancial.dao;
 
+import com.czbank.childrenfinancial.Utils.SnowFlake;
 import com.czbank.childrenfinancial.mapper.BusiInfMapper;
 import com.czbank.childrenfinancial.mapper.CardInfMapper;
 import com.czbank.childrenfinancial.mapper.LsInfMapper;
@@ -16,6 +17,9 @@ import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -100,6 +104,67 @@ public class UserMngDao {
         return busiInfMapper.getBusiInfByUserId(userId);
     }
 
+    public int register(UserInf userInf){
+        //"values(#{userId},#{account},#{relatedAccount},#{name},#{isParent},
+        // #{idCard},#{birthday},#{phoneNbr},#{loginPw},#{openTime})")
+
+//        userInf.setAccount(account);
+//        userInf.setLoginPw(loginPw);
+//        userInf.setName(name);
+//        userInf.setBirthday(birth);
+//        userInf.setPhoneNbr(phone);
+//        userInf.setIdCard(idCard);
+        //return userInfMapper.register(userInf);
+        int num = 0;
+        int ret = 0;
+        try{
+            num = userInfMapper.hasAccount(userInf);
+        }catch(Exception e){
+            ret = -1;
+            log.info("查询账户是否存在错误");
+        }
+        if(num != 0){
+            ret = 2;
+        }else{
+            //生成user_id
+            String idStr = String.valueOf(SnowFlake.nextId());
+            String id = idStr.substring(idStr.length() - 7);
+            log.info("id: " +id);
+            userInf.setUserId(id);
+            //获取年龄,判断是父还是子
+            int age = Integer.parseInt(userInf.getIdCard().substring(6,14));
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");//设置日期格式
+            log.info(df.format(new Date()));
+            int now = Integer.parseInt(df.format(new Date()));
+            int isAdult = now - age;
+            if(isAdult >= 18)
+            {
+                userInf.setIsParent("1");
+            } else {
+                userInf.setIsParent("0");
+            }
+            //获取当前时间
+            Date date = null;
+            try{
+                df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                date = df.parse(df.format(new Date()));
+                log.info(date.toString());
+            }catch(ParseException e){
+                e.printStackTrace();
+            }
+            userInf.setOpenTime(date);
+            try{
+                log.info("Dao: " + userInf);
+                ret = userInfMapper.register(userInf);
+            }catch(Exception e){
+                ret = -1;
+                log.info("注册插入表 user_inf 错误");
+                log.error(e.toString());
+            }
+        }
+        return ret;
+    }
+
     public void setLimitByUserId(String userId, BigDecimal limit) {
         if (StringUtils.isEmpty(userId)) {
             throw new RuntimeException("用户编号为空");
@@ -107,5 +172,6 @@ public class UserMngDao {
 
         cardInfMapper.updateLimitByUserId(userId, limit);
     }
+
 
 }
