@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @CrossOrigin
-@RequestMapping("/UserMng")
 @RestController
 @RequestMapping(value = "/userMng")
 public class UserMngController {
