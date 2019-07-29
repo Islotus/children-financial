@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -34,6 +35,15 @@ public class UserMngDao {
 
     @Autowired
     FinProductInfMapper finProductInfMapper;
+
+
+    public List<FinProductInf> getProductList(Set<String> riskSet) {
+        Example example = new Example(FinProductInf.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("riskLevel", riskSet);
+
+        return finProductInfMapper.selectByExample(example);
+    }
 
 
     public UserInf getUserInfByAcctAndPw(String account, String password) {

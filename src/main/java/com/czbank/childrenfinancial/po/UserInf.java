@@ -10,8 +10,6 @@ import java.util.Date;
 
 public class UserInf {
     //0定义字段
-
-
     private String userId;
     private String account;
     private String relatedAccount;
