@@ -4,6 +4,7 @@ import com.czbank.childrenfinancial.po.BusiInf;
 import com.czbank.childrenfinancial.postput.LoginIn;
 import com.czbank.childrenfinancial.postput.ProdBuyInfo;
 import com.czbank.childrenfinancial.service.FinProductInfService;
+import com.czbank.childrenfinancial.service.impl.UserMngServiceImpl;
 import org.bouncycastle.crypto.tls.DTLSTransport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +25,9 @@ public class FinProductInfController {
 
     @Autowired
     private FinProductInfService productService;
+
+    @Autowired
+    private UserMngServiceImpl userMngService;
 
 //    查询理财产品信息
     @RequestMapping(value = "/getProductInfo")
@@ -78,6 +82,9 @@ public class FinProductInfController {
             if(period != 0) DTTotal += amount;
             LCTotal += amount;
         }
+        double balance = Double.parseDouble((String)userMngService.getRemainAmt(loginIn.getAccount()).get("cardAmt"));
+        reMap.put("totalAmount",balance + LCTotal);
+        reMap.put("balance",balance);
         reMap.put("LCTotalAmount",LCTotal);
         reMap.put("DTTotalAmount",DTTotal);
         reMap.put("status",0);
