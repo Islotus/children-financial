@@ -146,6 +146,8 @@ public class UserMngServiceImpl implements UserManagementService {
 
         retMap.put("cardAmt", cardInf.getAmt().toPlainString());
         retMap.put("finAmt", busiInf.getAmt().toPlainString());
+        msg = "1";
+        retMap.put("status", msg);
 
         return retMap;
     }

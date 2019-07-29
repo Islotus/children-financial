@@ -58,6 +58,9 @@ public class BusiInf {
     @Column(name = "time_period")
     private int timePeriod;
 
+    @Column(name = "sum_amt")
+    private BigDecimal sumAmt;
+
     /**
      * 卡号
      */
@@ -185,5 +188,13 @@ public class BusiInf {
 
     public void setCardNbr(int cardNbr) {
         this.cardNbr = cardNbr;
+    }
+
+    public BigDecimal getSumAmt() {
+        return sumAmt;
+    }
+
+    public void setSumAmt(BigDecimal sumAmt) {
+        this.sumAmt = sumAmt;
     }
 }

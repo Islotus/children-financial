@@ -44,4 +44,19 @@ public interface FinProductInfMapper {
     @Update("update busi_inf set sum_amt = sum_amt + #{amt} where BUSI_ID = #{busiId}")
     void purchaseProdAgain(String busiId,double amt);
 
+//    根据账号查询都购买了哪些理财产品
+    @Select("select * from busi_inf where USER_ID = (select USER_ID from user_inf where ACCOUNT = #{account})")
+//    @Select("select * from busi_inf where USER_ID = (select USER_ID from user_inf where ACCOUNT = '${account}')")
+//    @Select("select * from busi_inf where USER_ID = (select USER_ID from user_inf where ACCOUNT = '1111111')")
+//    @Select("select * from busi_inf where USER_ID = '1'")
+    List<BusiInf> queryProdHasBuyed(String account);
+
+//    根据卡号查询userId
+    @Select("select USER_ID from user_inf where ACCOUNT = #{account}")
+    Object getUserIdByAccount(String account);
+
+//    根据UserId查询已经购买的理财产品
+    @Select("select * from busi_inf where USER_ID = #{userId}")
+    List<BusiInf> getBuyedProdByUserId(String userId);
+
 }

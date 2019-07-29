@@ -85,6 +85,7 @@ public class Scheduler {
                 financialOpsMapper.expenseUpdate(card, amt);
                 finProductInfMapper.purchaseProdAgain(busiId,amt);
 
+//                写入购买记录
             }
         }
 

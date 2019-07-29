@@ -2,9 +2,11 @@ package com.czbank.childrenfinancial.service.impl;
 
 import com.czbank.childrenfinancial.mapper.FinProductInfMapper;
 import com.czbank.childrenfinancial.mapper.FinancialOpsMapper;
+import com.czbank.childrenfinancial.po.BusiInf;
 import com.czbank.childrenfinancial.po.FinProductInf;
 import com.czbank.childrenfinancial.po.SchedulerParams;
 import com.czbank.childrenfinancial.service.FinProductInfService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service("finProductInfService")
+@Slf4j
+@Service
 public class FinProductInfServiceImpl implements FinProductInfService {
 
     @Autowired
@@ -89,9 +92,33 @@ public class FinProductInfServiceImpl implements FinProductInfService {
                     periodDayNum = 0;
             }
         }
+//        进行理财基金购买
         productMapper.purchaseProduct(busiId,userId,prodId,amount,updateTime,prodType,startTime,periodDayNum,card);
+//        写入流水记录
         return 0;
     }
+
+    @Override
+    public List<BusiInf> queryProdHasBuyed(String account) {
+        System.out.println("s层account：" + account);
+//        System.out.println("S层输出：" + productMapper.queryProdHasBuyed(account));
+//        log.info("" + productMapper.queryProdHasBuyed(account));
+//        return productMapper.queryProdHasBuyed(account);
+        String userId = (String)productMapper.getUserIdByAccount(account);
+        log.info("userid:" + userId);
+        List<BusiInf> res = productMapper.getBuyedProdByUserId(userId);
+        log.info("res:" + res);
+        return res;
+    }
+
+
+//    根据账户查询总资产
+    @Override
+    public Map<Object,Object> querySumPropertyByAccount(String account) {
+//        financialOpsMapper
+        return null;
+    }
+
 
     public List<SchedulerParams> testparams(){
         List<SchedulerParams> paramsList = productMapper.getParams1();

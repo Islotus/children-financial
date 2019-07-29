@@ -101,6 +101,7 @@ public class UserMngController {
         String account = in.getAccount();
 
         return JSON.toJSONString(userManagementService.getRemainAmt(account));
+//        return userManagementService.getRemainAmt(account);
     }
 
     /**
