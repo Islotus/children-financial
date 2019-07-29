@@ -58,6 +58,20 @@ public class BusiInf {
     @Column(name = "time_period")
     private int timePeriod;
 
+    public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit) {
+        this.profit = profit;
+    }
+
+    /**
+     * 收益
+     */
+    @Column(name = "profit")
+    private BigDecimal profit;
+
     /**
      * 获取业务编号
      *

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @CrossOrigin
-@RequestMapping("/UserMng")
 @RestController
 @RequestMapping(value = "/userMng")
 public class UserMngController {
@@ -129,6 +128,21 @@ public class UserMngController {
         log.info("account=[{}], isSetParent=[{}], limit=[{}]", account, isSetParent, limit);
 
         return JSON.toJSONString(userManagementService.setLimit(account, isSetParent, limit));
+    }
+
+    /**
+     * 已办理的理财详情查询-理财产品表+业务表
+     * @param in
+     * @return
+     */
+    @RequestMapping(value = "/queryFinDetail")
+    public Object queryFinDetail(@RequestBody UserMngIn in) {
+        String account = in.getAccount();
+
+        Object o = userManagementService.getFinProdDetail(account);
+        log.info(o.toString());
+
+        return JSON.toJSONString(o);
     }
 
 }

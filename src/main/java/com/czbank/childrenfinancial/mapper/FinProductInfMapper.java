@@ -32,4 +32,7 @@ public interface FinProductInfMapper {
     @Select("insert into busi_inf values (#{busiId},#{userId},#{prodId},#{amount},#{updateTime},#{prodType},#{startTime},#{periodDayNum})")
     void purchaseProduct(String busiId, String userId, String prodId, Double amount, Date updateTime, String prodType, Date startTime, int periodDayNum);
 
+    //根据productId查询product_desc
+    @Select("select * from fin_product_inf where PRODUCT_ID = #{prodId}")
+    FinProductInf getProductName(String prodId);
 }
