@@ -80,7 +80,10 @@ public class FinProductInfController {
             int period = busiInf.getTimePeriod();
             double amount = busiInf.getSumAmt().doubleValue();
             double profit = busiInf.getProfit().doubleValue();
-            if(period != 0) DTTotal += amount;
+            if(period != 0) {
+                DTTotal += amount;
+                DTTotal += profit;
+            }
             LCTotal += amount;
             LCTotal += profit;
         }
