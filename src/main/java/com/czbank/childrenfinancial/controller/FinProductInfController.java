@@ -83,11 +83,11 @@ public class FinProductInfController {
             LCTotal += amount;
         }
         double balance = Double.parseDouble((String)userMngService.getRemainAmt(loginIn.getAccount()).get("cardAmt"));
-        reMap.put("totalAmount",balance + LCTotal);
-        reMap.put("balance",balance);
-        reMap.put("LCTotalAmount",LCTotal);
-        reMap.put("DTTotalAmount",DTTotal);
-        reMap.put("status",0);
+        reMap.put("totalAmount",balance + LCTotal + "");
+        reMap.put("balance",balance + "");
+        reMap.put("LCTotalAmount",LCTotal + "");
+        reMap.put("DTTotalAmount",DTTotal + "");
+        reMap.put("status",0 + "");
         return reMap;
     }
 
