@@ -102,6 +102,14 @@ public class UserMngDao {
         return busiInfMapper.getBusiInfByUserId(userId);
     }
 
+    public List<BusiInf> getBusiInfList(String userId) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new RuntimeException("用户编号为空");
+        }
+
+        return busiInfMapper.getBusiInfList(userId);
+    }
+
     public int register(UserInf userInf){
         //"values(#{userId},#{account},#{relatedAccount},#{name},#{isParent},
         // #{idCard},#{birthday},#{phoneNbr},#{loginPw},#{openTime})")
