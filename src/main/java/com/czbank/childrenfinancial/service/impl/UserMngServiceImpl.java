@@ -162,6 +162,9 @@ public class UserMngServiceImpl implements UserManagementService {
         List<LsInf> lsList = new ArrayList<>();
         lsList = userMngDao.queryLsInfByAccount(account, (pageNum - 1) * pageSize, pageSize);
         log.info(lsList.toString());
+        for (LsInf ls : lsList) {
+            log.info("流水时间" + ls.getAddTime().toString());
+        }
         retMap.put("lsList", lsList);
         msg = "1";
         retMap.put("status", msg);
@@ -342,8 +345,6 @@ public class UserMngServiceImpl implements UserManagementService {
             return retMap;
         }
 
-        //TODO理财产品表跟业务表联查
-
         //查询userInf表获取userId
         UserInf userInf = userMngDao.getUserInfByAccount(account);
         if (userInf == null) {
@@ -353,16 +354,23 @@ public class UserMngServiceImpl implements UserManagementService {
         }
 
         String userId = userInf.getUserId();
-        BusiInf busiInf =  userMngDao.getBusiInfByUserId(userId);
-        String productId = busiInf.getFinProductId();
-        FinProductInf finProd = userMngDao.getFinProdIdInf(productId);
-        retMap.put("prodName", finProd.getProductName());
-        BigDecimal rate = finProd.getRate();
-        rate = rate.multiply(new BigDecimal(100));
-        String rateStr = rate.toPlainString() + " " + "%";
-        retMap.put("rate", rateStr);
-        log.info(rateStr);
-        retMap.put("profit", busiInf.getProfit().toPlainString());
+        List<BusiInf> busiInfList =  userMngDao.getBusiInfList(userId);
+        List<Map<String, String>> mapList = new ArrayList<>();
+        for (BusiInf busiInf : busiInfList) {
+            Map<String, String> map = new HashMap<>();
+            String productId = busiInf.getFinProductId();
+            FinProductInf finProd = userMngDao.getFinProdIdInf(productId);
+            map.put("prodName", finProd.getProductName());
+            BigDecimal rate = finProd.getRate();
+            rate = rate.multiply(new BigDecimal(100));
+            String rateStr = rate.toPlainString() + " " + "%";
+            map.put("rate", rateStr);
+            log.info(rateStr);
+            map.put("profit", busiInf.getProfit().toPlainString());
+            mapList.add(map);
+        }
+
+        retMap.put("result", mapList);
         msg = "1";
         retMap.put("status", msg);
 

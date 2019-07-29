@@ -16,6 +16,9 @@ public interface BusiInfMapper extends Mapper<BusiInf> {
     @Select("select * from BUSI_INF where USER_ID=#{userId} limit 1")
     BusiInf getBusiInfByUserId(String userId);
 
+    @Select("select * from BUSI_INF where USER_ID=#{userId}")
+    List<BusiInf> getBusiInfList(String userId);
+
     int countByExample(BusiInfExample example);
 
     int deleteByExample(BusiInfExample example);
