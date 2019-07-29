@@ -1,15 +1,8 @@
 package com.czbank.childrenfinancial.dao;
 
 import com.czbank.childrenfinancial.Utils.SnowFlake;
-import com.czbank.childrenfinancial.mapper.BusiInfMapper;
-import com.czbank.childrenfinancial.mapper.CardInfMapper;
-import com.czbank.childrenfinancial.mapper.LsInfMapper;
-import com.czbank.childrenfinancial.mapper.UserInfMapper;
-import com.czbank.childrenfinancial.po.BusiInf;
-import com.czbank.childrenfinancial.po.CardInf;
-import com.czbank.childrenfinancial.po.LsInf;
-import com.czbank.childrenfinancial.po.UserInf;
-import com.netflix.discovery.converters.Auto;
+import com.czbank.childrenfinancial.mapper.*;
+import com.czbank.childrenfinancial.po.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -37,6 +31,17 @@ public class UserMngDao {
 
     @Autowired
     BusiInfMapper busiInfMapper;
+
+    @Autowired
+    FinProductInfMapper finProductInfMapper;
+
+    public List<FinProductInf> getProductList(Set<String> riskSet) {
+        Example example = new Example(FinProductInf.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("riskLevel", riskSet);
+
+        return finProductInfMapper.selectByExample(example);
+    }
 
     public UserInf getUserInfByAcctAndPw(String account, String password) {
 

@@ -4,17 +4,17 @@ package com.czbank.childrenfinancial.mapper;
 import com.czbank.childrenfinancial.po.BusiInf;
 import com.czbank.childrenfinancial.po.FinProductInf;
 import com.czbank.childrenfinancial.po.SchedulerParams;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
 import java.util.List;
 
-@Mapper
+@org.apache.ibatis.annotations.Mapper
 @Repository
-public interface FinProductInfMapper {
+public interface FinProductInfMapper extends Mapper<FinProductInf> {
 
 //    查询是父母还是小孩
     @Select("select IS_PARENT from user_inf where ACCOUNT = #{account}")
