@@ -3,6 +3,7 @@ package com.czbank.childrenfinancial.dao;
 import com.czbank.childrenfinancial.Utils.SnowFlake;
 import com.czbank.childrenfinancial.mapper.*;
 import com.czbank.childrenfinancial.po.*;
+import com.netflix.discovery.converters.Auto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,7 @@ public class UserMngDao {
     @Autowired
     FinProductInfMapper finProductInfMapper;
 
+
     public List<FinProductInf> getProductList(Set<String> riskSet) {
         Example example = new Example(FinProductInf.class);
         Example.Criteria criteria = example.createCriteria();
@@ -42,6 +44,7 @@ public class UserMngDao {
 
         return finProductInfMapper.selectByExample(example);
     }
+
 
     public UserInf getUserInfByAcctAndPw(String account, String password) {
 
@@ -161,7 +164,7 @@ public class UserMngDao {
             try{
                 log.info("Dao: " + userInf);
                 ret = userInfMapper.register(userInf);
-            }catch(Exception e){
+            } catch(Exception e){
                 ret = -1;
                 log.info("注册插入表 user_inf 错误");
                 log.error(e.toString());
@@ -176,6 +179,15 @@ public class UserMngDao {
         }
 
         cardInfMapper.updateLimitByUserId(userId, limit);
+    }
+
+    public FinProductInf getFinProdIdInf(String prodId) {
+        if (StringUtils.isEmpty(prodId)) {
+            throw new RuntimeException("用户编号为空");
+        }
+
+
+        return finProductInfMapper.getProductName(prodId);
     }
 
 

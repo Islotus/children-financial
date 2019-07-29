@@ -59,4 +59,7 @@ public interface FinProductInfMapper extends Mapper<FinProductInf> {
     @Select("select * from busi_inf where USER_ID = #{userId}")
     List<BusiInf> getBuyedProdByUserId(String userId);
 
+    //根据productId查询product_desc
+    @Select("select * from fin_product_inf where PRODUCT_ID = #{prodId}")
+    FinProductInf getProductName(String prodId);
 }
