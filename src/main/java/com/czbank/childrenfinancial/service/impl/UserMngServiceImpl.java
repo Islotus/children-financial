@@ -2,10 +2,7 @@ package com.czbank.childrenfinancial.service.impl;
 
 import com.czbank.childrenfinancial.Utils.SnowFlake;
 import com.czbank.childrenfinancial.dao.UserMngDao;
-import com.czbank.childrenfinancial.po.BusiInf;
-import com.czbank.childrenfinancial.po.CardInf;
-import com.czbank.childrenfinancial.po.LsInf;
-import com.czbank.childrenfinancial.po.UserInf;
+import com.czbank.childrenfinancial.po.*;
 import com.czbank.childrenfinancial.service.UserManagementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,6 +145,7 @@ public class UserMngServiceImpl implements UserManagementService {
         retMap.put("finAmt", busiInf.getAmt().toPlainString());
         msg = "1";
         retMap.put("status", msg);
+
 
         return retMap;
     }
@@ -329,6 +327,42 @@ public class UserMngServiceImpl implements UserManagementService {
         limitDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
         userMngDao.setLimitByUserId(userId, limitDecimal);
         log.info("限额设置成功");
+        msg = "1";
+        retMap.put("status", msg);
+
+        return retMap;
+    }
+
+    @Override
+    public Map<String, Object> getFinProdDetail(String account) {
+        String msg = "-1";
+        Map<String, Object> retMap = new HashMap<>();
+        if (checkNull(account)) {
+            retMap.put("status", msg);
+            return retMap;
+        }
+
+        //TODO理财产品表跟业务表联查
+
+        //查询userInf表获取userId
+        UserInf userInf = userMngDao.getUserInfByAccount(account);
+        if (userInf == null) {
+            log.error("账号查询结果为空");
+            retMap.put("status", msg);
+            return retMap;
+        }
+
+        String userId = userInf.getUserId();
+        BusiInf busiInf =  userMngDao.getBusiInfByUserId(userId);
+        String productId = busiInf.getFinProductId();
+        FinProductInf finProd = userMngDao.getFinProdIdInf(productId);
+        retMap.put("prodName", finProd.getProductName());
+        BigDecimal rate = finProd.getRate();
+        rate = rate.multiply(new BigDecimal(100));
+        String rateStr = rate.toPlainString() + " " + "%";
+        retMap.put("rate", rateStr);
+        log.info(rateStr);
+        retMap.put("profit", busiInf.getProfit().toPlainString());
         msg = "1";
         retMap.put("status", msg);
 

@@ -33,4 +33,6 @@ public interface UserManagementService {
     //卡表限额设置
     Map<String, Object> setLimit(String account, String isSetParent, String limitStr);
 
+    Map<String, Object> getFinProdDetail(String account);
+
 }
