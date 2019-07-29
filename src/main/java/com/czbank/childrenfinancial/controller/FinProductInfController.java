@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,7 @@ public class FinProductInfController {
         Map<Object,Object> reMap = new HashMap<>();
         List<BusiInf> busiInfList = (List)queryProdHasBuyed(loginIn);
         if(busiInfList.isEmpty()){
-            reMap.put("status",-1);
+            reMap.put("status","-1");
             return reMap;
         }
         double LCTotal = 0;
@@ -81,11 +82,15 @@ public class FinProductInfController {
             LCTotal += amount;
         }
         double balance = Double.parseDouble((String)userMngService.getRemainAmt(loginIn.getAccount()).get("cardAmt"));
-        reMap.put("totalAmount",balance + LCTotal);
-        reMap.put("balance",balance);
-        reMap.put("LCTotalAmount",LCTotal);
-        reMap.put("DTTotalAmount",DTTotal);
-        reMap.put("status",0);
+        double totalAmount = balance + LCTotal;
+
+        DecimalFormat df = new DecimalFormat("0.000");
+
+        reMap.put("totalAmount",df.format(totalAmount));
+        reMap.put("balance",df.format(balance));
+        reMap.put("LCTotalAmount",df.format(LCTotal));
+        reMap.put("DTTotalAmount",df.format(DTTotal));
+        reMap.put("status","0");
         return reMap;
     }
 
