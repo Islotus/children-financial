@@ -162,6 +162,9 @@ public class UserMngServiceImpl implements UserManagementService {
         List<LsInf> lsList = new ArrayList<>();
         lsList = userMngDao.queryLsInfByAccount(account, (pageNum - 1) * pageSize, pageSize);
         log.info(lsList.toString());
+        for (LsInf ls : lsList) {
+            log.info("流水时间" + ls.getAddTime().toString());
+        }
         retMap.put("lsList", lsList);
         msg = "1";
         retMap.put("status", msg);
