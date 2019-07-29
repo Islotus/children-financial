@@ -79,8 +79,10 @@ public class FinProductInfController {
         for(BusiInf busiInf : busiInfList){
             int period = busiInf.getTimePeriod();
             double amount = busiInf.getSumAmt().doubleValue();
+            double profit = busiInf.getProfit().doubleValue();
             if(period != 0) DTTotal += amount;
             LCTotal += amount;
+            LCTotal += profit;
         }
         double balance = Double.parseDouble((String)userMngService.getRemainAmt(loginIn.getAccount()).get("cardAmt"));
         double totalAmount = balance + LCTotal;
