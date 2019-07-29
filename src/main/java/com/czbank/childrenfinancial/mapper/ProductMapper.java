@@ -17,6 +17,6 @@ public interface ProductMapper {
     public String getIsParent(String account);
 
 //    根据是父母还是小孩来查询理财产品
-    @Select(("select * from fin_product_inf where RISK_LEVEL = #{riskLevel}"))
-    public List<FinProductInf> getProductInf(String riskLevel);
+    @Select(("select * from fin_product_inf where RISK_LEVEL in #{riskLevel}"))
+    public List<FinProductInf> getProductInf(List<String> riskLevel);
 }

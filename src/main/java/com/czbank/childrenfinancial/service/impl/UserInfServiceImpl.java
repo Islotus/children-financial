@@ -1,11 +1,10 @@
 package com.czbank.childrenfinancial.service.impl;
 
-import com.alibaba.fastjson.JSON;
+import com.czbank.childrenfinancial.Utils.RedisUtil;
 import com.czbank.childrenfinancial.dao.UserMngDao;
 import com.czbank.childrenfinancial.mapper.UserInfMapper;
 import com.czbank.childrenfinancial.po.UserInf;
 import com.czbank.childrenfinancial.service.UserInfService;
-import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,9 @@ public class UserInfServiceImpl implements UserInfService {
 
     @Autowired
     private UserMngDao userMngDao;
+
+    @Autowired
+    RedisUtil redisUtil;
 
 
     @Override
@@ -51,15 +53,29 @@ public class UserInfServiceImpl implements UserInfService {
     }
     @Override
     public Map selectByAccountPw(UserInf userInf) {
-        UserInf uf = userInfMapper.selectByAccountPw(userInf);
-        Map<Object, Object> reMap = new HashMap<>();
-        if(uf != null) {
-            reMap.put("user", uf);
-            reMap.put("status", "0");
-        } else {
-            reMap.put("status","1");
+        String  key = "user:" + userInf.getAccount();
+        boolean haskey = redisUtil.hasKey(key);
+        UserInf uf = new UserInf();
+        Map<String, Object> reMap = new HashMap<>();
+        if (haskey) {
+            log.info("redis 数据源");
+            reMap = (HashMap)redisUtil.get(key);
+            log.info("reMap={}",reMap);
+            return reMap;
+        } else{
+            uf = userInfMapper.selectByAccountPw(userInf);
+            log.info(uf.toString());
+            if(uf != null) {
+                reMap.put("user", uf);
+                reMap.put("status", "0");
+            } else {
+                reMap.put("status","1");
+            }
+
+            redisUtil.set(key, reMap);
+            log.info("database 数据源");
+            return reMap;
         }
-        return reMap;
     }
     @Override
     public int register(UserInf userInf){
