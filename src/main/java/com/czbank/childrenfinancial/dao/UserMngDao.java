@@ -198,5 +198,12 @@ public class UserMngDao {
         return finProductInfMapper.getProductName(prodId);
     }
 
+    public List<CardInf> getCardInfByUserIdList(Set<String> userIdSet) {
+        Example example = new Example(CardInf.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("userId", userIdSet);
+
+        return cardInfMapper.selectByExample(example);
+    }
 
 }
