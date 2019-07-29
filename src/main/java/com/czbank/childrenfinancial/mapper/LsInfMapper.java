@@ -12,7 +12,7 @@ import java.util.List;
 @org.apache.ibatis.annotations.Mapper
 @Repository
 public interface LsInfMapper extends Mapper<LsInf> {
-    @Select("select * from LS_INF where OWN_ACCT=#{account} order by ADD_TIME limit #{pn},#{ps}")
+    @Select("select * from LS_INF where OWN_ACCT=#{account} order by ADD_TIME  limit #{pn},#{ps}")
     public List<LsInf> queryLsInf(String account, int pn, int ps);
 
     int countByExample(LsInfExample example);
