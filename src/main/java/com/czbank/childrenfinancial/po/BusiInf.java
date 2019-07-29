@@ -82,6 +82,7 @@ public class BusiInf {
     @Column(name = "CARD_NBR")
     private int cardNbr;
 
+
     /**
      * 获取业务编号
      *
@@ -211,4 +212,6 @@ public class BusiInf {
     public void setSumAmt(BigDecimal sumAmt) {
         this.sumAmt = sumAmt;
     }
+
+
 }
