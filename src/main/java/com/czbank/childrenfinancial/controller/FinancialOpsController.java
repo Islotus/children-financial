@@ -23,7 +23,7 @@ public class FinancialOpsController {
     private FinancialOpsService financialOpsService;
 
     @RequestMapping(value = "/getCardsByAccount")
-    @ApiOperation(value = "查询理财产品",notes = "根据用户账号查询理财产品")
+    @ApiOperation(value = "查询用户卡号",notes = "根据用户账号查询卡号")
     public Object getCardsByAccount(@RequestBody LoginIn loginIn){
         String account = loginIn.getAccount();
         List<String> cards = financialOpsService.getCardsByAccount(account);
