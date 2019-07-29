@@ -33,7 +33,7 @@ public interface FinProductInfMapper extends Mapper<FinProductInf> {
     String getProdTypeByProdId(String prodId);
 
 //    购买理财产品
-    @Select("insert into busi_inf values (#{busiId},#{userId},#{prodId},#{amount},#{updateTime},#{prodType},#{startTime},#{periodDayNum},#{amount},#{card})")
+    @Select("insert into busi_inf values (#{busiId},#{userId},#{prodId},#{amount},#{updateTime},#{prodType},#{startTime},#{periodDayNum},#{amount},#{card},0)")
     void purchaseProduct(String busiId, String userId, String prodId, Double amount, Date updateTime, String prodType, Date startTime, int periodDayNum,String card);
 
 //    定时器所需参数查询
