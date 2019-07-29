@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -188,5 +189,12 @@ public class UserMngDao {
         return finProductInfMapper.getProductName(prodId);
     }
 
+    public List<CardInf> getCardInfByUserIdList(Set<String> userIdSet) {
+        Example example = new Example(CardInf.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("userId", userIdSet);
+
+        return cardInfMapper.selectByExample(example);
+    }
 
 }

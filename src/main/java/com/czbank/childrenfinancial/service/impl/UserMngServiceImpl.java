@@ -280,6 +280,22 @@ public class UserMngServiceImpl implements UserManagementService {
         retMap.putAll(getRemainAmt(sonAcct));
         UserInf sonUserInf = userMngDao.getUserInfByAccount(sonAcct);
         retMap.put("sonUserInf", sonUserInf);
+        Set<String> userIdSet = new HashSet<>();
+        userIdSet.add(parent.getUserId());
+        userIdSet.add(sonUserInf.getUserId());
+        /*List<CardInf> cardInfList = userMngDao.getCardInfByUserIdList(userIdSet);
+        for (CardInf card : cardInfList) {
+            if (card.getUserId().equals(parent.getUserId())) {
+                retMap.put("pCardNbr", card.getCardNbr());
+            } else if (card.getUserId().equals(sonUserInf.getUserId())) {
+                retMap.put("sCardNbr", card.getCardNbr());
+            }
+        }*/
+
+        CardInf card1 = userMngDao.getCardInfByUserId(parent.getUserId());
+        retMap.put("pCardNbr", card1.getCardNbr());
+        CardInf card2 = userMngDao.getCardInfByUserId(sonUserInf.getUserId());
+        retMap.put("sCardNbr", card2.getCardNbr());
         log.info(retMap.toString());
         msg = "1";
         retMap.put("status", msg);
