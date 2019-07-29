@@ -101,6 +101,9 @@ public class FinProductInfServiceImpl implements FinProductInfService {
             }
         }
 //        进行理财基金购买
+
+        System.out.println("" + busiId + " " + userId+" "+prodId+" "+amount +" "+ updateTime+" "+prodType+" "+startTime+" "+periodDayNum+" "+card);
+
         productMapper.purchaseProduct(busiId,userId,prodId,amount,updateTime,prodType,startTime,periodDayNum,card);
 //        写入流水记录
         return 0;

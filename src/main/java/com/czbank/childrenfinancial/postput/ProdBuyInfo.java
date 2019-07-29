@@ -37,4 +37,15 @@ public class ProdBuyInfo {
     public void setPeriod(String period) {
         this.period = period;
     }
+
+    @Override
+    public String toString() {
+        return "ProdBuyInfo{" +
+                "card='" + card + '\'' +
+                ", prodId='" + prodId + '\'' +
+                ", amount='" + amount + '\'' +
+                ", period='" + period + '\'' +
+                '}';
+    }
+
 }

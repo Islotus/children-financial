@@ -47,6 +47,7 @@ public class FinProductInfController {
         Double amount = Double.parseDouble(amountStr);
         String period = prodBuyInfo.getPeriod();
 
+
         int r = productService.purchaseProduct(card,prodId,amount,period);
         String resultStatus = String.valueOf(r);
 
