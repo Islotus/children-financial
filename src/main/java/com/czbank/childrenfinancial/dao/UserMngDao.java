@@ -37,6 +37,15 @@ public class UserMngDao {
     FinProductInfMapper finProductInfMapper;
 
 
+    public List<FinProductInf> getProductList(Set<String> riskSet) {
+        Example example = new Example(FinProductInf.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("riskLevel", riskSet);
+
+        return finProductInfMapper.selectByExample(example);
+    }
+
+
     public UserInf getUserInfByAcctAndPw(String account, String password) {
 
         Example example = new Example(UserInf.class);

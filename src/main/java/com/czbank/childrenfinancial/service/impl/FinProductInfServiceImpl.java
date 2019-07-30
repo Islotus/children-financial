@@ -1,5 +1,6 @@
 package com.czbank.childrenfinancial.service.impl;
 
+import com.czbank.childrenfinancial.dao.UserMngDao;
 import com.czbank.childrenfinancial.mapper.FinProductInfMapper;
 import com.czbank.childrenfinancial.mapper.FinancialOpsMapper;
 import com.czbank.childrenfinancial.po.BusiInf;
@@ -8,14 +9,10 @@ import com.czbank.childrenfinancial.po.SchedulerParams;
 import com.czbank.childrenfinancial.service.FinProductInfService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -25,10 +22,21 @@ public class FinProductInfServiceImpl implements FinProductInfService {
     private FinProductInfMapper productMapper;
     @Autowired
     private FinancialOpsMapper financialOpsMapper;
+    @Autowired
+    private UserMngDao userMngDao;
 
     public Map getProductInfo(String account){
-        String riskLevel = productMapper.getIsParent(account);
-        List<FinProductInf> fpiList = productMapper.getProductInf(riskLevel);
+        String isParent = productMapper.getIsParent(account);
+        log.info("parent:" + isParent);
+        Set<String> riskSet = new HashSet<>();
+        if (isParent.equals("1")) {
+            riskSet.add("1");
+            riskSet.add("2");
+            riskSet.add("3");
+        }else {
+            riskSet.add("1");
+        }
+        List<FinProductInf> fpiList = userMngDao.getProductList(riskSet);
         for(FinProductInf fpi : fpiList){
             String rl = fpi.getRiskLevel();
             switch (rl){
@@ -93,8 +101,18 @@ public class FinProductInfServiceImpl implements FinProductInfService {
             }
         }
 //        进行理财基金购买
+
+        System.out.println("" + busiId + " " + userId+" "+prodId+" "+amount +" "+ updateTime+" "+prodType+" "+startTime+" "+periodDayNum+" "+card);
+
         productMapper.purchaseProduct(busiId,userId,prodId,amount,updateTime,prodType,startTime,periodDayNum,card);
-//        写入流水记录
+//        写入理财流水记录
+
+        String fromAccount = financialOpsMapper.getAccountByCard(card);
+        String toAccount = productMapper.getProdNameByProdId(prodId);
+        String settleCardNbr = productMapper.getSettleCardNbr(prodId);
+        financialOpsMapper.addTransRecord(FinancialOpsServiceImpl.generateId(8),fromAccount,toAccount,card,settleCardNbr,amount,financialOpsMapper.getAmt(card),"02",new Date(System.currentTimeMillis()));
+//        写入理财流水记录
+
         return 0;
     }
 

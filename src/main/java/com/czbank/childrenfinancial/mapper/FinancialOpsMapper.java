@@ -55,5 +55,4 @@ public interface FinancialOpsMapper {
     @Select("select ADD_TIME from ls_inf where BUSI_ACCEPT_ID = #{id}")
     Date getDate(String id);
 
-
 }

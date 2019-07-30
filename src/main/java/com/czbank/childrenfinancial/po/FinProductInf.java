@@ -1,5 +1,6 @@
 package com.czbank.childrenfinancial.po;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.ToString;
 
 import javax.persistence.Column;
@@ -43,6 +44,7 @@ public class FinProductInf {
     /**
      * 理财产品截止日期
      */
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     @Column(name = "END_DATE")
     private Date endDate;
 

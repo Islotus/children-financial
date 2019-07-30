@@ -4,17 +4,17 @@ package com.czbank.childrenfinancial.mapper;
 import com.czbank.childrenfinancial.po.BusiInf;
 import com.czbank.childrenfinancial.po.FinProductInf;
 import com.czbank.childrenfinancial.po.SchedulerParams;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
 import java.util.List;
 
-@Mapper
+@org.apache.ibatis.annotations.Mapper
 @Repository
-public interface FinProductInfMapper {
+public interface FinProductInfMapper extends Mapper<FinProductInf> {
 
 //    查询是父母还是小孩
     @Select("select IS_PARENT from user_inf where ACCOUNT = #{account}")
@@ -33,7 +33,7 @@ public interface FinProductInfMapper {
     String getProdTypeByProdId(String prodId);
 
 //    购买理财产品
-    @Select("insert into busi_inf values (#{busiId},#{userId},#{prodId},#{amount},#{updateTime},#{prodType},#{startTime},#{periodDayNum},#{amount},#{card})")
+    @Select("insert into busi_inf values (#{busiId},#{userId},#{prodId},#{amount},#{updateTime},#{prodType},#{startTime},#{periodDayNum},#{amount},#{card},0)")
     void purchaseProduct(String busiId, String userId, String prodId, Double amount, Date updateTime, String prodType, Date startTime, int periodDayNum,String card);
 
 //    定时器所需参数查询
@@ -62,4 +62,12 @@ public interface FinProductInfMapper {
     //根据productId查询product_desc
     @Select("select * from fin_product_inf where PRODUCT_ID = #{prodId}")
     FinProductInf getProductName(String prodId);
+
+//    根据理财产品ID查询理财产品所属卡号
+    @Select("select SETTLE_CARDNBR from fin_product_inf where PRODUCT_ID = #{prodId}")
+    String getSettleCardNbr(String prodId);
+
+//    根据理财产品ID查询理财产品名
+    @Select("select PRODUCT_NAME from fin_product_inf where PRODUCT_ID = #{prodId}")
+    String getProdNameByProdId(String prodId);
 }
