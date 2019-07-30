@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface LsInfMapper extends Mapper<LsInf> {
 
-    @Select("select * from LS_INF where OWN_ACCT=#{account} and STATUS IN ('00', '01') order by ADD_TIME DESC limit #{pn},#{ps}")
+    @Select("select * from LS_INF where OWN_ACCT=#{account} order by ADD_TIME DESC limit #{pn},#{ps}")
     public List<LsInf> queryLsInf(String account, int pn, int ps);
 
     //理财流水
