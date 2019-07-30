@@ -20,6 +20,9 @@ public interface UserManagementService {
     //流水明细查询-ok
     Map<String, Object> queryLsDetail(String account, int pageNum, int pageSize);
 
+    //理财流水查询
+    Map<String, Object> queryFinLsDetail(String account, int pageNum, int pageSize);
+
     //账户信息维护
     //修改自己的账户 父母账户修改子女账户
     //手机号维护-ok

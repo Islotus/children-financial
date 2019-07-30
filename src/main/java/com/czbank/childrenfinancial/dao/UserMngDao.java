@@ -92,6 +92,14 @@ public class UserMngDao {
         return lsInfMapper.queryLsInf(account, pageNum, pageSize);
     }
 
+    public List<LsInf> queryFinLsInfByAccount(String account, int pageNum, int pageSize) {
+        if (StringUtils.isEmpty(account)) {
+            throw new RuntimeException("账号为空");
+        }
+
+        return lsInfMapper.queryFinLsInf(account, pageNum, pageSize);
+    }
+
     public void settleCardNbr(CardInf cardInf) {
         cardInfMapper.insertSelective(cardInf);
     }
