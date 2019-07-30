@@ -12,8 +12,13 @@ import java.util.List;
 @org.apache.ibatis.annotations.Mapper
 @Repository
 public interface LsInfMapper extends Mapper<LsInf> {
-    @Select("select * from LS_INF where OWN_ACCT=#{account} order by ADD_TIME limit #{pn},#{ps}")
+    //转账流水
+    @Select("select * from LS_INF where OWN_ACCT=#{account} and STATUS IN ('00', '01') order by ADD_TIME DESC limit #{pn},#{ps}")
     public List<LsInf> queryLsInf(String account, int pn, int ps);
+
+    //理财流水
+    @Select("select * from LS_INF where OWN_ACCT=#{account} and STATUS='02' order by ADD_TIME DESC limit #{pn},#{ps}")
+    public List<LsInf> queryFinLsInf(String account, int pn, int ps);
 
     int countByExample(LsInfExample example);
 
