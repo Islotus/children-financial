@@ -62,4 +62,12 @@ public interface FinProductInfMapper extends Mapper<FinProductInf> {
     //根据productId查询product_desc
     @Select("select * from fin_product_inf where PRODUCT_ID = #{prodId}")
     FinProductInf getProductName(String prodId);
+
+//    根据理财产品ID查询理财产品所属卡号
+    @Select("select SETTLE_CARDNBR from fin_product_inf where PRODUCT_ID = #{prodId}")
+    String getSettleCardNbr(String prodId);
+
+//    根据理财产品ID查询理财产品名
+    @Select("select PRODUCT_NAME from fin_product_inf where PRODUCT_ID = #{prodId}")
+    String getProdNameByProdId(String prodId);
 }
