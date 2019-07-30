@@ -78,6 +78,19 @@ public class UserMngController {
     }
 
     /**
+     *  理财流水查询-流水表
+     *
+     */
+    @RequestMapping(value = "/queryFinLsInf")
+    public Object queryFinLsInf(@RequestBody UserMngIn in) {
+        String account = in.getAccount();
+        String pageSize = in.getPs();
+        String pageNum = in.getPn();
+
+        return JSON.toJSONString(userManagementService.queryFinLsDetail(account, Integer.parseInt(pageNum), Integer.parseInt(pageSize)));
+    }
+
+    /**
      * 银行卡绑定-卡表
      * @param in
      * @return "1"表示更新成功

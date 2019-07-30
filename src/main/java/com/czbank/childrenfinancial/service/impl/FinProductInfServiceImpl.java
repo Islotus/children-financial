@@ -105,7 +105,14 @@ public class FinProductInfServiceImpl implements FinProductInfService {
         System.out.println("" + busiId + " " + userId+" "+prodId+" "+amount +" "+ updateTime+" "+prodType+" "+startTime+" "+periodDayNum+" "+card);
 
         productMapper.purchaseProduct(busiId,userId,prodId,amount,updateTime,prodType,startTime,periodDayNum,card);
-//        写入流水记录
+//        写入理财流水记录
+
+        String fromAccount = financialOpsMapper.getAccountByCard(card);
+        String toAccount = productMapper.getProdNameByProdId(prodId);
+        String settleCardNbr = productMapper.getSettleCardNbr(prodId);
+        financialOpsMapper.addTransRecord(FinancialOpsServiceImpl.generateId(8),fromAccount,toAccount,card,settleCardNbr,amount,financialOpsMapper.getAmt(card),"02",new Date(System.currentTimeMillis()));
+//        写入理财流水记录
+
         return 0;
     }
 

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
@@ -162,10 +164,49 @@ public class UserMngServiceImpl implements UserManagementService {
         List<LsInf> lsList = new ArrayList<>();
         lsList = userMngDao.queryLsInfByAccount(account, (pageNum - 1) * pageSize, pageSize);
         log.info(lsList.toString());
+/*
         for (LsInf ls : lsList) {
-            log.info("流水时间" + ls.getAddTime().toString());
+
+            String time = ls.getAddTime().toString();
+            String dateStr = "1970-1-1 08:00:00";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String returnstr = "";
+            Date miDate;
+            try {
+                miDate = sdf.parse(dateStr);
+                Object t1 = miDate.getTime();
+                long h1 = Long.parseLong(time) * 1000 + Long.parseLong(t1.toString());
+                returnstr = sdf.format(h1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            log.info("时间转换:" + returnstr);
+
+
+            log.info("流水时间:" + ls.getAddTime());
         }
+ */
         retMap.put("lsList", lsList);
+        msg = "1";
+        retMap.put("status", msg);
+
+        return retMap;
+    }
+
+    @Override
+    public Map<String, Object> queryFinLsDetail(String account, int pageNum, int pageSize) {
+        String msg = "-1";
+        Map<String, Object> retMap = new HashMap<>();
+        if (checkNull(account)) {
+            retMap.put("status", msg);
+            return retMap;
+        }
+
+        List<LsInf> finLsList = new ArrayList<>();
+        finLsList = userMngDao.queryFinLsInfByAccount(account, (pageNum - 1) * pageSize, pageSize);
+        log.info(finLsList.toString());
+        retMap.put("lsList", finLsList);
         msg = "1";
         retMap.put("status", msg);
 
